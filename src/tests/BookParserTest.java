@@ -1,12 +1,14 @@
 import books.Book;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import parsers.IBookParser;
 import parsers.XMLBookParser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BookParserTest {
-    private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=endersgame";
+    private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
     private static final double DELTA = 1.0e-8;  // tolerance for testing equality on doubles
     private Book book;
 
@@ -21,4 +23,8 @@ public class BookParserTest {
         }
     }
 
+    @Test
+    public void testGetTitle() {
+        assertEquals("Dremaology", book.getTitle());
+    }
 }
