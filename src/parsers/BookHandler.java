@@ -2,15 +2,10 @@ package parsers;
 
 import author.Author;
 import books.Book;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.List;
 
 public class BookHandler extends DefaultHandler {
@@ -51,17 +46,9 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         super.endElement(uri, localName, qName);
-        try {
-            DocumentBuilderFactory docFact = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docFact.newDocumentBuilder();
-            Document doc = docBuilder.parse(uri);
-            NodeList list = doc.getElementsByTagName("book");
-            Node b = list.item(0); // first book in XML file - book we need
-            NodeList children = b.getChildNodes();
-            String title = children.item(1).getNodeValue();
+        if (qName.equalsIgnoreCase("title")) {
+            title = builder.toString().trim();
             book.setTitle(title);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         builder.setLength(0);
     }
