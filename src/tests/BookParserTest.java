@@ -25,6 +25,6 @@ public class BookParserTest {
 
     @Test
     public void testGetTitle() {
-        assertEquals("Dremaology", book.getTitle());
+        assertEquals("Dreamology", book.getTitle());
     }
 }
