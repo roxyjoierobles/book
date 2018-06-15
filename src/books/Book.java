@@ -13,6 +13,7 @@ public class Book {
     private String publicationYear;
     private String publicationDay;
     private String publicationMonth;
+    public String publicationDate;
 
     public Double avgRating;
     public String description;
@@ -104,6 +105,11 @@ public class Book {
     // returns publication day
     public String getPublicationDay() {
         return this.publicationDay;
+    }
+
+    // returns publication date
+    public String getPublicationDate() {
+        return this.publicationDate;
     }
 
     // returns avg rating
@@ -214,6 +220,11 @@ public class Book {
     // sets publication day
     public void setPublicationDay(String day) {
         this.publicationDay = day;
+    }
+
+    // sets publication date
+    public void setPublicationDate(String year, String month, String day) {
+        this.publicationDate = year + " " + month + " " + day;
     }
 
     // sets avg rating

@@ -40,6 +40,7 @@ public class BookHandler extends DefaultHandler {
     private boolean yearCount = false;
     private boolean monthCount = false;
     private boolean dayCount = false;
+    private boolean publicationCount = false;
 
 
     /*
@@ -90,6 +91,8 @@ public class BookHandler extends DefaultHandler {
             publicationDay = builder.toString().trim();
             book.setPublicationDay(publicationDay);
             dayCount = true;
+            book.setPublicationDate(publicationYear, publicationMonth, publicationDay);
+            publicationCount = true;
         }
 
 

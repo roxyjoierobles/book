@@ -46,5 +46,6 @@ public class BookParserTest {
         assertEquals("2016", book.getPublicationYear());
         assertEquals("April", book.getPublicationMonth());
         assertEquals("12", book.getPublicationDay());
+        assertEquals("2016 April 12", book.getPublicationDate());
     }
 }
