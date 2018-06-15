@@ -139,6 +139,11 @@ public class BookHandler extends DefaultHandler {
             ratingsSum = Integer.parseInt(ratingsSumStr);
             book.setRatingsSum(ratingsSum);
             ratingsSumCount = true;
+        } else if (qName.equalsIgnoreCase("ratings_count") && !ratingsCountCount) {
+            ratingsCountStr = builder.toString().trim();
+            ratingsCount = Integer.parseInt(ratingsCountStr);
+            book.setRatingsCount(ratingsCount);
+            ratingsCountCount = true;
         }
 
         // TODO
