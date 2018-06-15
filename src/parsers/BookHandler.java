@@ -1,5 +1,6 @@
 package parsers;
 
+import author.Author;
 import books.Book;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -44,6 +45,7 @@ public class BookHandler extends DefaultHandler {
 
     private Book book;
 
+    private Author author;
     private String name;
     private String role;
     private String authorLink;
@@ -176,6 +178,11 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(dist2);
             book.setDist1(dist1);
             distCount = true;
+        } else if (qName.equalsIgnoreCase("name") && !nameCount) {
+            name = builder.toString().trim();
+            author = new Author(name);
+            book.setAuthor(author);
+            nameCount = true;
         }
 
 

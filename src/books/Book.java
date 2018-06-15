@@ -1,11 +1,13 @@
 package books;
 
+import author.Author;
+
 import java.util.List;
 
 public class Book {
     public String title;
     // temporarily made author a string
-    public String author;
+    public Author author;
 
     //public List<Author> additionalAuthors;
     public String isbn;
@@ -42,7 +44,7 @@ public class Book {
     }
 
     // constructor with given title, author
-    public Book(String title, String author) {
+    public Book(String title, Author author) {
         this.title = title;
         this.author = author;
     }
@@ -53,7 +55,7 @@ public class Book {
     }
 
     // return author of book
-    public String getAuthor() {
+    public Author getAuthor() {
         return this.author;
     }
 
@@ -168,7 +170,7 @@ public class Book {
     }
 
     // sets author of book to given
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

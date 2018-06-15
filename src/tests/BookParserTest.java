@@ -76,5 +76,9 @@ public class BookParserTest {
      }
      */
 
+    @Test
+    public void testGetAuthorInfo() {
+        assertEquals("Lucy Keating", book.getAuthor().getName());
+    }
 
 }
