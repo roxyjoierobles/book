@@ -27,6 +27,8 @@ public class BookHandler extends DefaultHandler {
     private List<Author> authors;
     private Author author;
 
+    private boolean titleCount = false;
+
     public BookHandler(Book book) {
         this.book = book;
         builder = new StringBuilder();
@@ -46,9 +48,13 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         super.endElement(uri, localName, qName);
-        if (qName.equalsIgnoreCase("title")) {
+        if (titleCount) {
+            return;
+        }
+        if (qName.equalsIgnoreCase("title") && !titleCount) {
             title = builder.toString().trim();
             book.setTitle(title);
+            titleCount = true;
         }
         builder.setLength(0);
     }
