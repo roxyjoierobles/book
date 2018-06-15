@@ -42,10 +42,11 @@ public class BookParserTest {
     }
 
     @Test
-    public void testGetPublicationDate() {
+    public void testGetPublication() {
         assertEquals("2016", book.getPublicationYear());
         assertEquals("April", book.getPublicationMonth());
         assertEquals("12", book.getPublicationDay());
         assertEquals("2016 April 12", book.getPublicationDate());
+        assertEquals("HarperTeen", book.getPublisher());
     }
 }

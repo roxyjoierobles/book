@@ -17,6 +17,7 @@ public class BookHandler extends DefaultHandler {
     private String publicationDay;
     private String publicationMonth;
     private String publicationMonthVal;
+    private String publisher;
 
     private String avgRatingStr;
     private Double avgRating;
@@ -40,7 +41,7 @@ public class BookHandler extends DefaultHandler {
     private boolean yearCount = false;
     private boolean monthCount = false;
     private boolean dayCount = false;
-    private boolean publicationCount = false;
+    private boolean publisherCount = false;
 
 
     /*
@@ -92,7 +93,10 @@ public class BookHandler extends DefaultHandler {
             book.setPublicationDay(publicationDay);
             dayCount = true;
             book.setPublicationDate(publicationYear, publicationMonth, publicationDay);
-            publicationCount = true;
+        } else if (qName.equalsIgnoreCase("publisher") && !publisherCount) {
+            publisher = builder.toString().trim();
+            book.setPublisher(publisher);
+            publisherCount = true;
         }
 
 
