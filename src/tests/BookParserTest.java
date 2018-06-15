@@ -69,4 +69,15 @@ public class BookParserTest {
         assertTrue(3.66 == book.getAvgRating());
     }
 
+    /** needs CDATA
+     @Test
+     public void testGetGoodreadsURL() {
+     }
+     */
+
+    @Test
+    public void testGetAuthor() {
+        assertEquals("Lucy Keating", book.getAuthor().getName());
+    }
+
 }

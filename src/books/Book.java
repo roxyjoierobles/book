@@ -193,11 +193,6 @@ public class Book {
         this.author = author;
     }
 
-    // sets additional authors to given
-    public void setAdditionalAuthors(List<Author> authors) {
-        this.additionalAuthors = authors;
-    }
-
     // adds an author to additional authors of book
     public void addAdditionalAuthor(Author author) {
         this.additionalAuthors.add(author);

@@ -43,11 +43,18 @@ public class BookHandler extends DefaultHandler {
     private Integer dist1;
     private String dist1Str;
 
-
-
     private Book book;
+
+
     private List<Author> authors;
     private Author author;
+    private String name;
+    private String role;
+    private String authorLink;
+    private Double authorAvgRating;
+    private String authorAvgRatingStr;
+    private Integer authorRatingCount;
+    private String authorRatingCountStr;
 
 
     // counts for book to ensure each book is parse
@@ -62,8 +69,15 @@ public class BookHandler extends DefaultHandler {
     private boolean avgRatingCount = false;
     private boolean ratingsSumCount = false;
     private boolean ratingsCountCount = false;
+    private boolean distCount;
+
+    // for author
     private boolean authorCount = false;
-    private boolean distCount = false;
+    private boolean nameCount = false;
+    private boolean roleCount = false;
+    private boolean authorLinkCount = false;
+    private boolean authorAvgRatingCount = false;
+    private boolean authorRatingCountCount = false;
 
 
     /*
@@ -166,16 +180,18 @@ public class BookHandler extends DefaultHandler {
             avgRating = Double.parseDouble(avgRatingStr);
             book.setAvgRating(avgRating);
             avgRatingCount = true;
+        } else if (qName.equalsIgnoreCase("author") && !authorCount) {
+            if (qName.equalsIgnoreCase("name")) {
+                name = builder.toString().trim();
+                author.setName(name);
+                book.setAuthor(author);
+                authorCount = true;
+            }
         }
 
-        /*else if (qName.equalsIgnoreCase("isbn") &&) {
-            isbn = builder.toString().trim();
-            book.setISBN(isbn);
-        } else if (qName.equalsIgnoreCase("isbn13")) {
-            isbn13 = builder.toString().trim();
-            book.setISBN13(isbn13);
-        }
-        */
+        // TODO
+        // figure out how to get CDATA - isbns, goodreads url, description, author link
+
         builder.setLength(0);
     }
 

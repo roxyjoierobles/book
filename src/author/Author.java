@@ -3,11 +3,16 @@ package author;
 
 public class Author {
     public String name;
-    public Role role;
+    public String role;
+    public Double avgRating;
+    public Integer ratingsCount;
 
     public Author() {
-        this.name = null;
-        this.role = Role.UNKNOWN;
+        this.name = "";
+        this.role = "";
+        this.avgRating = null;
+        this.ratingsCount = null;
+
     }
 
     // constructor with given name
@@ -16,7 +21,7 @@ public class Author {
     }
 
     // constructor with given name and role
-    public Author(String name, Role role) {
+    public Author(String name, String role) {
         this.name = name;
         this.role = role;
     }
@@ -27,8 +32,18 @@ public class Author {
     }
 
     // returns role of author
-    public Role getRole() {
+    public String getRole() {
         return this.role;
+    }
+
+    // returns authors avg rating
+    public Double getAvgRating() {
+        return this.avgRating;
+    }
+
+    // returns authors ratings count
+    public Integer getRatingsCount() {
+        return this.ratingsCount;
     }
 
     // sets name of author
@@ -37,8 +52,18 @@ public class Author {
     }
 
     // sets role of author
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
+    }
+
+    // sets avg rating
+    public void setAvgRating(Double rating) {
+        this.avgRating = rating;
+    }
+
+    // sets ratings count
+    public void setRatingsCount(Integer count) {
+        this.ratingsCount = count;
     }
 
     @Override
