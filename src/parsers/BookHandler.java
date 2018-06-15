@@ -183,6 +183,14 @@ public class BookHandler extends DefaultHandler {
             author = new Author(name);
             book.setAuthor(author);
             nameCount = true;
+        } else if (qName.equalsIgnoreCase("role") && !roleCount) {
+            role = builder.toString().trim();
+            if (role.equals("")) {
+                author.setRole("author");
+            } else {
+                author.setRole(role);
+            }
+            roleCount = true;
         }
 
 
