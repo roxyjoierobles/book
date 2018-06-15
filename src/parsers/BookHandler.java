@@ -12,6 +12,7 @@ public class BookHandler extends DefaultHandler {
     private StringBuilder builder;
     private String title;
     private String isbn;
+    private String isbn13;
     private String avgRatingStr;
     private Double avgRating;
     private String description;
@@ -27,7 +28,16 @@ public class BookHandler extends DefaultHandler {
     private List<Author> authors;
     private Author author;
 
+    // used to retrieve title of book
     private boolean titleCount = false;
+
+    /*
+    // for cdata - isbn
+    private boolean cdatai = false;
+
+    // for cdata - isbn13
+    private boolean cdatai13 = false;
+    */
 
     public BookHandler(Book book) {
         this.book = book;
@@ -43,6 +53,11 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
+        /* if (qName.equalsIgnoreCase("isbn")) {
+            cdatai = true;
+        } else if (qName.equalsIgnoreCase("isbn13")) {
+            cdatai13 = true;
+        } */
     }
 
     @Override
@@ -50,12 +65,19 @@ public class BookHandler extends DefaultHandler {
         super.endElement(uri, localName, qName);
         if (titleCount) {
             return;
-        }
-        if (qName.equalsIgnoreCase("title") && !titleCount) {
+        } else if (qName.equalsIgnoreCase("title") && !titleCount) {
             title = builder.toString().trim();
             book.setTitle(title);
             titleCount = true;
         }
+        /*else if (qName.equalsIgnoreCase("isbn") &&) {
+            isbn = builder.toString().trim();
+            book.setISBN(isbn);
+        } else if (qName.equalsIgnoreCase("isbn13")) {
+            isbn13 = builder.toString().trim();
+            book.setISBN13(isbn13);
+        }
+        */
         builder.setLength(0);
     }
 }

@@ -27,4 +27,12 @@ public class BookParserTest {
     public void testGetTitle() {
         assertEquals("Dreamology", book.getTitle());
     }
+
+    /** NEED TO WORK ON
+    @Test
+    public void testGetISBNs() {
+        assertEquals("006238001", book.getISBN());
+        assertEquals("9780062380005", book.getISBN13());
+    }
+    */
 }

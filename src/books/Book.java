@@ -83,7 +83,7 @@ public class Book {
     }
 
     // returns isbn13
-    public String getIsbn13() {
+    public String getISBN13() {
         return this.isbn13;
     }
 
