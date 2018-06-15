@@ -57,16 +57,10 @@ public class BookParserTest {
     }
     */
 
-     @Test
-    public void testGetRatingsDistribution() {
-        assertTrue(26560 == book.getRatingsSum());
-        //assertTrue(7257 == book.getRatingsCount());
-        //assertTrue(1719 == book.getDist5());
-        //assertTrue(2460 == book.getDist4());
-        //assertTrue(2161 == book.getDist3());
-        //assertTrue(725 == book.getDist2());
-        //assertTrue(192 == book.getDist1());
-        //assertTrue(3.66 == book.getAvgRating());
+
+    @Test
+    public void testGetRatingInfo() {
+        assertTrue(3.66 == book.getAvgRating());
     }
 
     /** needs CDATA
