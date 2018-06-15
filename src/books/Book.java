@@ -2,6 +2,7 @@ package books;
 
 import author.Author;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -9,7 +10,7 @@ public class Book {
     // temporarily made author a string
     public Author author;
 
-    //public List<Author> additionalAuthors;
+    public List<Author> additionalAuthors;
     public String isbn;
     public String isbn13;
     private String publicationYear;
@@ -22,8 +23,7 @@ public class Book {
     public String description;
     public String imgURL;
     public String goodreadsLink;
-    public Genre genre;
-    public List<String> bookshelves;
+    public List<Genre> genres;
 
     public Integer ratingsCount;
     public Integer ratingsSum;
@@ -36,6 +36,8 @@ public class Book {
 
     // default constructor
     public Book() {
+        this.genres = new ArrayList<>();
+        this.additionalAuthors = new ArrayList<>();
     }
 
     // constructor with given title,
@@ -60,9 +62,9 @@ public class Book {
     }
 
     // returns additional authors
-    /*public List<Author> getAdditionalAuthors() {
+    public List<Author> getAdditionalAuthors() {
         return this.additionalAuthors;
-    } */
+    }
 
     // returns isbn
     public String getISBN() {
@@ -154,15 +156,11 @@ public class Book {
         return this.dist1;
     }
 
-    // returns genre of book
-    public Genre getGenre() {
-        return this.genre;
+    // returns genres of book
+    public List<Genre> getGenres() {
+        return this.genres;
     }
 
-    // returns bookshelves that book is on
-    public List<String> getBookshelves() {
-        return this.bookshelves;
-    }
 
     // sets title of book to given string
     public void setTitle(String title) {
@@ -270,13 +268,7 @@ public class Book {
     }
 
     // sets genre of book
-    public void setGenre(Genre genre) {
-        this.genre = genre;
+    public void addGenre(Genre genre) {
+        this.genres.add(genre);
     }
-
-    // adds bookshelf book is on
-    public void addBookshelf(String bookshelf) {
-        this.bookshelves.add(bookshelf);
-    }
-
 }

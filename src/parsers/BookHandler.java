@@ -2,6 +2,7 @@ package parsers;
 
 import author.Author;
 import books.Book;
+import books.Genre;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -73,10 +74,9 @@ public class BookHandler extends DefaultHandler {
     private boolean authorCount = false;
     private boolean nameCount = false;
     private boolean roleCount = false;
-    private boolean authorLinkCount = false;
-    private boolean authorAvgRatingCount = false;
-    private boolean authorRatingCountCount = false;
 
+
+    private List<String> shelves;
 
     /*
     // for cdata - isbn
@@ -100,6 +100,49 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
+        if (localName.equalsIgnoreCase("shelf")) {
+            String genre = attributes.getValue("name");
+            shelves.add(genre);
+            if (shelves.contains("youngadult") || shelves.contains("young-adult") || shelves.contains("ya") || shelves.contains("ya-fiction") || shelves.contains("ya-romance") ||  shelves.contains("ya-mystery") || shelves.contains("ya-contemporary") || shelves.contains("teen") || shelves.contains("teen-fiction")) {
+                book.addGenre(Genre.YOUNGADULT);
+            } else if (shelves.contains("romance") || shelves.contains("love") || shelves.contains("ya-romance") || shelves.contains("contemporary-romance") || shelves.contains("romantic")) {
+                book.addGenre(Genre.ROMANCE);
+            } else if (shelves.contains("contemporary") || shelves.contains("contemporary-romance") || shelves.contains("ya-contemporary") || shelves.contains("genre=contemporary") || shelves.contains("historical-romance")) {
+                book.addGenre(Genre.CONTEMPORARY);
+            } else if (shelves.contains("fantasy") || shelves.contains("urban-fantasy")|| shelves.contains("sci-fi-fantasy")|| shelves.contains("fantasy-sci-fi")) {
+                book.addGenre(Genre.FANTASY);
+            } else if (shelves.contains("fiction") || shelves.contains("ya-fiction") || shelves.contains("realistic-fiction") || shelves.contains("general-fiction") || shelves.contains("dystopian") || shelves.contains("dystopic") || shelves.contains("historical-fiction") ||  shelves.contains("teen-fiction")) {
+                book.addGenre(Genre.FICTION);
+            } else if (shelves.contains("magical-realism")) {
+                book.addGenre(Genre.MAGICALREALISM);
+            } else if (shelves.contains("science-fiction") || shelves.contains("scifi") || shelves.contains("sci-fi") || shelves.contains("sci-fi-fantasy") || shelves.contains("fantasy-sci-fi") || shelves.contains("science")) {
+                book.addGenre(Genre.SCIFI);
+            } else if (shelves.contains("paranormal") || shelves.contains("supernatural")) {
+                book.addGenre(Genre.PARANORMAL);
+            } else if (shelves.contains("adult") || shelves.contains("adult-fiction")) {
+                book.addGenre(Genre.ADULT);
+            } else if (shelves.contains("historical") || shelves.contains("historical-fiction") || shelves.contains("historical-romance") || shelves.contains("history")) {
+                book.addGenre(Genre.HISTORICAL);
+            } else if (shelves.contains("chicklit") || shelves.contains("chick-list")) {
+                book.addGenre(Genre.CHICKLIT);
+            } else if (shelves.contains("mystery") || shelves.contains("mystery-thriller") || shelves.contains("ya-mystery") || shelves.contains("mystery-suspense") || shelves.contains("mysteries") ||shelves.contains("murder-mystery") ||  shelves.contains("mystery-thriller-horror") || shelves.contains("crime-mystery") || shelves.contains("spy") || shelves.contains("spies")) {
+                book.addGenre(Genre.MYSTERY);
+            } else if (shelves.contains("thriller") || shelves.contains("thrillers") || shelves.contains("suspense") || shelves.contains("mystery-thriller") || shelves.contains("mystery-suspense") ||  shelves.contains("mystery-thriller-horror") | shelves.contains("spy") || shelves.contains("spies")) {
+                book.addGenre(Genre.THRILLER);
+            } else if (shelves.contains("crime") || shelves.contains("murder") || shelves.contains("murder-mystery") || shelves.contains("serial-killer") || shelves.contains("serial-killers") || shelves.contains("crime-mystery") || shelves.contains("death")) {
+                book.addGenre(Genre.CRIME);
+            } else if (shelves.contains("horror") || shelves.contains("mystery-thriller-horror")) {
+                book.addGenre(Genre.HORROR);
+            } else if (shelves.contains("humor") || shelves.contains("funny")) {
+                book.addGenre(Genre.HUMOR);
+            } else if (shelves.contains("action") || shelves.contains("action-adventure")) {
+                book.addGenre(Genre.ACTION);
+            } else if (shelves.contains("adventure") || shelves.contains("action-adventure")) {
+                book.addGenre(Genre.ADVENTURE);
+            } else if (shelves.contains("nonfiction") || shelves.contains("non-fiction") || shelves.contains("biography") || shelves.contains("autobiography") || shelves.contains("auto-biography")) {
+                book.addGenre(Genre.NONFICTION);
+            }
+        }
     }
 
     @Override

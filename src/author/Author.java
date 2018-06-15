@@ -4,15 +4,10 @@ package author;
 public class Author {
     public String name;
     public String role;
-    public Double avgRating;
-    public Integer ratingsCount;
 
     public Author() {
         this.name = "";
         this.role = "";
-        this.avgRating = null;
-        this.ratingsCount = null;
-
     }
 
     // constructor with given name
@@ -36,16 +31,6 @@ public class Author {
         return this.role;
     }
 
-    // returns authors avg rating
-    public Double getAvgRating() {
-        return this.avgRating;
-    }
-
-    // returns authors ratings count
-    public Integer getRatingsCount() {
-        return this.ratingsCount;
-    }
-
     // sets name of author
     public void setName(String name) {
         this.name = name;
@@ -54,16 +39,6 @@ public class Author {
     // sets role of author
     public void setRole(String role) {
         this.role = role;
-    }
-
-    // sets avg rating
-    public void setAvgRating(Double rating) {
-        this.avgRating = rating;
-    }
-
-    // sets ratings count
-    public void setRatingsCount(Integer count) {
-        this.ratingsCount = count;
     }
 
     @Override

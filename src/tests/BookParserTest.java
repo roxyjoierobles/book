@@ -4,9 +4,7 @@ import org.junit.jupiter.api.Test;
 import parsers.IBookParser;
 import parsers.XMLBookParser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BookParserTest {
     private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
@@ -81,5 +79,21 @@ public class BookParserTest {
         assertEquals("Lucy Keating", book.getAuthor().getName());
         assertEquals("author", book.getAuthor().getRole());
     }
+
+   /*
+    @Test
+    public void testGetGenres() {
+        List<Genre> genres = new ArrayList<>();
+        genres.add(Genre.YOUNGADULT);
+        genres.add(Genre.CONTEMPORARY);
+        genres.add(Genre.ROMANCE);
+        genres.add(Genre.FICTION);
+        genres.add(Genre.FANTASY);
+        genres.add(Genre.MAGICALREALISM);
+        genres.add(Genre.SCIFI);
+        genres.add(Genre.PARANORMAL);
+        assertEquals(genres, book.getGenres());
+    }
+    */
 
 }
