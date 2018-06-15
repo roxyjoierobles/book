@@ -63,6 +63,11 @@ public class BookParserTest {
         assertTrue(3.66 == book.getAvgRating());
         assertTrue(26575 == book.getRatingsSum());
         assertTrue(7262 == book.getRatingsCount());
+        assertTrue(1720 == book.getDist5());
+        assertTrue(2460 == book.getDist4());
+        assertTrue(2164 == book.getDist3());
+        assertTrue(725 == book.getDist2());
+        assertTrue(193 == book.getDist1());
     }
 
     /** needs CDATA
