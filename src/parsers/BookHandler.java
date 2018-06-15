@@ -6,6 +6,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BookHandler extends DefaultHandler {
@@ -30,6 +32,19 @@ public class BookHandler extends DefaultHandler {
     private String ratingsCountStr;
     private Integer ratingsCount;
 
+    private Integer dist5;
+    private String dist5Str;
+    private Integer dist4;
+    private String dist4Str;
+    private Integer dist3;
+    private String dist3Str;
+    private Integer dist2;
+    private String dist2Str;
+    private Integer dist1;
+    private String dist1Str;
+
+
+
     private Book book;
     private List<Author> authors;
     private Author author;
@@ -42,6 +57,13 @@ public class BookHandler extends DefaultHandler {
     private boolean monthCount = false;
     private boolean dayCount = false;
     private boolean publisherCount = false;
+    private boolean descriptionCount = false;
+    private boolean goodreadsCount = false;
+    private boolean avgRatingCount = false;
+    private boolean ratingsSumCount = false;
+    private boolean ratingsCountCount = false;
+    private boolean authorCount = false;
+    private boolean distCount = false;
 
 
     /*
@@ -97,6 +119,48 @@ public class BookHandler extends DefaultHandler {
             publisher = builder.toString().trim();
             book.setPublisher(publisher);
             publisherCount = true;
+        } else if (qName.equalsIgnoreCase("description") && !descriptionCount) {
+            description = builder.toString().trim();
+            book.setDescription(description);
+            descriptionCount = true;
+        } else if (qName.equalsIgnoreCase("ratings_sum") && !ratingsSumCount) {
+            ratingsSumStr = builder.toString().trim();
+            ratingsSum = Integer.parseInt(ratingsSumStr);
+            book.setRatingsSum(ratingsSum);
+            ratingsSumCount = true;
+        } else if (qName.equalsIgnoreCase("ratings_count") && !ratingsCountCount) {
+            ratingsCountStr = builder.toString().trim();
+            ratingsCount = Integer.parseInt(ratingsCountStr);
+            book.setRatingsCount(ratingsCount);
+            ratingsCountCount = true;
+        } else if (qName.equalsIgnoreCase("rating_dist") && !distCount) {
+            String s = builder.toString().trim();
+            List<String> dist = Arrays.asList(s.split(":"));
+            List<String> allDist = new ArrayList<>();
+            // 1st string in allDist is 5
+            // 2nd string is dist5|4
+            dist5Str = dist.get(1).substring(0, dist.get(1).length() - 2);
+            // 3rd string is dist4|3
+            dist4Str = dist.get(2).substring(0, dist.get(2).length() - 2);
+            // 4th string is dist3|2
+            dist3Str = dist.get(3).substring(0, dist.get(3).length() - 2);
+            // 5th string is dist2|1
+            dist2Str = dist.get(4).substring(0, dist.get(4).length() - 2);
+            // 6th string is dist1|total
+            dist1Str = dist.get(5).substring(0, dist.get(5).length() - 6);
+
+            dist5 = Integer.parseInt(dist5Str);
+            dist4 = Integer.parseInt(dist4Str);
+            dist3 = Integer.parseInt(dist3Str);
+            dist2 = Integer.parseInt(dist2Str);
+            dist1 = Integer.parseInt(dist1Str);
+
+            book.setDist5(dist5);
+            book.setDist4(dist4);
+            book.setDist3(dist3);
+            book.setDist2(dist2);
+            book.setDist1(dist1);
+            distCount = true;
         }
 
 

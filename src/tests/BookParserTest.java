@@ -5,6 +5,7 @@ import parsers.IBookParser;
 import parsers.XMLBookParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class BookParserTest {
@@ -28,7 +29,7 @@ public class BookParserTest {
         assertEquals("Dreamology", book.getTitle());
     }
 
-    /** NEED TO WORK ON
+    /** NEED TO WORK ON - CDATA
     @Test
     public void testGetISBNs() {
         assertEquals("006238001", book.getISBN());
@@ -42,11 +43,29 @@ public class BookParserTest {
     }
 
     @Test
-    public void testGetPublication() {
+    public void testGetPublicationInfo() {
         assertEquals("2016", book.getPublicationYear());
         assertEquals("April", book.getPublicationMonth());
         assertEquals("12", book.getPublicationDay());
         assertEquals("2016 April 12", book.getPublicationDate());
         assertEquals("HarperTeen", book.getPublisher());
     }
+
+    /* needs CDATA - to fix
+    @Test
+    public void testGetDescription() {
+    }
+    */
+
+     @Test
+    public void testGetRatingsDistribution() {
+        assertTrue(26560 == book.getRatingsSum());
+        assertTrue(7257 == book.getRatingsCount());
+        assertTrue(1719 == book.getDist5());
+        assertTrue(2460 == book.getDist4());
+        assertTrue(2161 == book.getDist3());
+        assertTrue(725 == book.getDist2());
+        assertTrue(192 == book.getDist1());
+    }
+
 }
