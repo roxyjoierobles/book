@@ -61,6 +61,7 @@ public class BookParserTest {
     @Test
     public void testGetRatingInfo() {
         assertTrue(3.66 == book.getAvgRating());
+        assertTrue(26575 == book.getRatingsSum());
     }
 
     /** needs CDATA

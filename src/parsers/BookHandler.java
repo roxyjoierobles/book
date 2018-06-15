@@ -134,6 +134,11 @@ public class BookHandler extends DefaultHandler {
             avgRating = Double.parseDouble(avgRatingStr);
             book.setAvgRating(avgRating);
             avgRatingCount = true;
+        } else if (qName.equalsIgnoreCase("ratings_sum") && !ratingsSumCount) {
+            ratingsSumStr = builder.toString().trim();
+            ratingsSum = Integer.parseInt(ratingsSumStr);
+            book.setRatingsSum(ratingsSum);
+            ratingsSumCount = true;
         }
 
         // TODO
