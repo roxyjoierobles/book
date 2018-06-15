@@ -1,13 +1,13 @@
 package books;
 
-import author.Author;
-
 import java.util.List;
 
 public class Book {
     public String title;
-    public Author author;
-    public List<Author> additionalAuthors;
+    // temporarily made author a string
+    public String author;
+
+    //public List<Author> additionalAuthors;
     public String isbn;
     public String isbn13;
     private String publicationYear;
@@ -42,30 +42,9 @@ public class Book {
     }
 
     // constructor with given title, author
-    public Book(String title, Author author) {
+    public Book(String title, String author) {
         this.title = title;
         this.author = author;
-    }
-
-    // constructor with given title, isbn
-    public Book(String title, String isbn) {
-        this.title = title;
-        this.isbn = isbn;
-    }
-
-    // constructor with given title, author, genre
-    public Book(String title, Author author, Genre genre) {
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-    }
-
-    // constructor with given title, author, isbn and rating
-    public Book(String title, Author author, String isbn, Genre genre) {
-        this.title = title;
-        this.author = author;
-        this.isbn = isbn;
-        this.genre = genre;
     }
 
     // returns title of book
@@ -74,14 +53,14 @@ public class Book {
     }
 
     // return author of book
-    public Author getAuthor() {
+    public String getAuthor() {
         return this.author;
     }
 
     // returns additional authors
-    public List<Author> getAdditionalAuthors() {
+    /*public List<Author> getAdditionalAuthors() {
         return this.additionalAuthors;
-    }
+    } */
 
     // returns isbn
     public String getISBN() {
@@ -189,14 +168,14 @@ public class Book {
     }
 
     // sets author of book to given
-    public void setAuthor(Author author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
     // adds an author to additional authors of book
-    public void addAdditionalAuthor(Author author) {
+    /*public void addAdditionalAuthor(Author author) {
         this.additionalAuthors.add(author);
-    }
+    }*/
 
     // sets isbn
     public void setISBN(String isbn) {

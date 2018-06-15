@@ -1,6 +1,5 @@
 package parsers;
 
-import author.Author;
 import books.Book;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -45,9 +44,6 @@ public class BookHandler extends DefaultHandler {
 
     private Book book;
 
-
-    private List<Author> authors;
-    private Author author;
     private String name;
     private String role;
     private String authorLink;
@@ -175,20 +171,7 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(dist2);
             book.setDist1(dist1);
             distCount = true;
-        } else if (qName.equalsIgnoreCase("average_rating") && !avgRatingCount) {
-            avgRatingStr = builder.toString().trim();
-            avgRating = Double.parseDouble(avgRatingStr);
-            book.setAvgRating(avgRating);
-            avgRatingCount = true;
-        } else if (qName.equalsIgnoreCase("author") && !authorCount) {
-            if (qName.equalsIgnoreCase("name")) {
-                name = builder.toString().trim();
-                author.setName(name);
-                book.setAuthor(author);
-                authorCount = true;
-            }
         }
-
         // TODO
         // figure out how to get CDATA - isbns, goodreads url, description, author link
 
