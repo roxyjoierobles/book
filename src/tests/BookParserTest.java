@@ -66,6 +66,7 @@ public class BookParserTest {
         assertTrue(2161 == book.getDist3());
         assertTrue(725 == book.getDist2());
         assertTrue(192 == book.getDist1());
+        assertTrue(3.66 == book.getAvgRating());
     }
 
 }

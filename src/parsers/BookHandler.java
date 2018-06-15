@@ -161,9 +161,12 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(dist2);
             book.setDist1(dist1);
             distCount = true;
+        } else if (qName.equalsIgnoreCase("average_rating") && !avgRatingCount) {
+            avgRatingStr = builder.toString().trim();
+            avgRating = Double.parseDouble(avgRatingStr);
+            book.setAvgRating(avgRating);
+            avgRatingCount = true;
         }
-
-
 
         /*else if (qName.equalsIgnoreCase("isbn") &&) {
             isbn = builder.toString().trim();
