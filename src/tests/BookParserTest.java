@@ -35,4 +35,16 @@ public class BookParserTest {
         assertEquals("9780062380005", book.getISBN13());
     }
     */
+
+    @Test
+    public void testGetImgURL() {
+        assertEquals("https://images.gr-assets.com/books/1435962370m/25817310.jpg", book.getImgURL());
+    }
+
+    @Test
+    public void testGetPublicationDate() {
+        assertEquals("2016", book.getPublicationYear());
+        assertEquals("April", book.getPublicationMonth());
+        assertEquals("12", book.getPublicationDay());
+    }
 }

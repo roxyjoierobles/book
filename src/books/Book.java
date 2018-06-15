@@ -10,6 +10,10 @@ public class Book {
     public List<Author> additionalAuthors;
     public String isbn;
     public String isbn13;
+    private String publicationYear;
+    private String publicationDay;
+    private String publicationMonth;
+
     public Double avgRating;
     public String description;
     public String imgURL;
@@ -85,6 +89,21 @@ public class Book {
     // returns isbn13
     public String getISBN13() {
         return this.isbn13;
+    }
+
+    // returns publication year
+    public String getPublicationYear() {
+        return this.publicationYear;
+    }
+
+    // returns publication month
+    public String getPublicationMonth() {
+        return this.publicationMonth;
+    }
+
+    // returns publication day
+    public String getPublicationDay() {
+        return this.publicationDay;
     }
 
     // returns avg rating
@@ -180,6 +199,21 @@ public class Book {
     // sets isbn13
     public void setISBN13(String isbn) {
         this.isbn13 = isbn;
+    }
+
+    // sets publication year
+    public void setPublicationYear(String year) {
+        this.publicationYear = year;
+    }
+
+    // sets publication month
+    public void setPublicationMonth(String month) {
+        this.publicationMonth = month;
+    }
+
+    // sets publication day
+    public void setPublicationDay(String day) {
+        this.publicationDay = day;
     }
 
     // sets avg rating
