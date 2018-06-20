@@ -21,6 +21,9 @@ public class BookHandler extends DefaultHandler {
     private String publicationMonthVal;
     private String publisher;
 
+    private List<Book> similarBooks;
+    private int count = 0;
+
     private String avgRatingStr;
     private Double avgRating;
     private String description;
@@ -99,6 +102,12 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
+        if (qName.equalsIgnoreCase("similar_books")) {
+            similarBooks = new ArrayList<>();
+            if (qName.equalsIgnoreCase("book")) {
+                count++;
+            }
+        }
     }
 
     @Override
@@ -190,6 +199,16 @@ public class BookHandler extends DefaultHandler {
                 author.setRole(role);
             }
             roleCount = true;
+        } else if (qName.equalsIgnoreCase("similar_books")) {
+            while (count != 0) {
+                Book similar = new Book();
+                if (qName.equalsIgnoreCase("title")) {
+                    title = builder.toString().trim();
+                    similar.setTitle(title);
+                }
+                book.addSimilarBook(similar);
+                count--;
+            }
         }
 
 

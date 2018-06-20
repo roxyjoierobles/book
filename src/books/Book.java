@@ -2,7 +2,6 @@ package books;
 
 import author.Author;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -34,10 +33,10 @@ public class Book {
     public Integer dist2;
     public Integer dist1;
 
+    public List<Book> similarBooks;
+
     // default constructor
     public Book() {
-        this.genres = new ArrayList<>();
-        this.additionalAuthors = new ArrayList<>();
     }
 
     // constructor with given title,
@@ -270,5 +269,10 @@ public class Book {
     // sets genre of book
     public void addGenre(Genre genre) {
         this.genres.add(genre);
+    }
+
+    // adds book to similar books
+    public void addSimilarBook(Book book) {
+        this.similarBooks.add(book);
     }
 }
