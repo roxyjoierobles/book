@@ -29,13 +29,12 @@ public class BookParserTest {
         assertEquals("Dreamology", book.getTitle());
     }
 
-    /** NEED TO WORK ON - CDATA
+    /** NEED TO WORK ON - CDATA */
     @Test
     public void testGetISBNs() {
-        assertEquals("006238001", book.getISBN());
+        assertEquals("0062380001", book.getISBN());
         assertEquals("9780062380005", book.getISBN13());
     }
-    */
 
     @Test
     public void testGetImgURL() {

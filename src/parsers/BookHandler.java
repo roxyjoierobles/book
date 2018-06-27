@@ -50,6 +50,8 @@ public class BookHandler extends DefaultHandler {
 
     // counts for book to ensure each book is parse
     private boolean titleCount = false;
+    private boolean isbnCount = false;
+    private boolean isbn13Count = false;
     private boolean imgCount = false;
     private boolean yearCount = false;
     private boolean monthCount = false;
@@ -118,6 +120,14 @@ public class BookHandler extends DefaultHandler {
             title = builder.toString().trim();
             book.setTitle(title);
             titleCount = true;
+        } else if (qName.equalsIgnoreCase("isbn") && !isbnCount) {
+            isbn = builder.toString().trim();
+            book.setISBN(isbn);
+            isbnCount = true;
+        } else if (qName.equalsIgnoreCase("isbn13") && !isbn13Count) {
+            isbn13 = builder.toString().trim();
+            book.setISBN13(isbn13);
+            isbn13Count = true;
         } else if (qName.equalsIgnoreCase("image_url") && !imgCount) {
             img_url = builder.toString().trim();
             book.setImgURL(img_url);
