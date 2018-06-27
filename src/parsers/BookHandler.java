@@ -229,7 +229,7 @@ public class BookHandler extends DefaultHandler {
 
 
         // TODO
-        // figure out how to get CDATA - isbns, goodreads url, description, author link
+        // figure out how to get CDATA - goodreads url, description, author link
 
         builder.setLength(0);
     }

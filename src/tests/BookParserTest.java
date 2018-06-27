@@ -29,7 +29,6 @@ public class BookParserTest {
         assertEquals("Dreamology", book.getTitle());
     }
 
-    /** NEED TO WORK ON - CDATA */
     @Test
     public void testGetISBNs() {
         assertEquals("0062380001", book.getISBN());
@@ -50,14 +49,11 @@ public class BookParserTest {
         assertEquals("HarperTeen", book.getPublisher());
     }
 
-    /* needs CDATA - to fix
     @Test
     public void testGetDescription() {
+        assertEquals("For as long as Alice can remember, she has dreamed of Max. Together, they have travelled the world and fallen deliriously, hopelessly in love. Max is the boy of her dreams—and only her dreams. Because he doesn’t exist.<br /><br />But when Alice walks into class on her first day at a new school, there he is. Real Max is nothing like Dream Max. He’s stubborn and complicated. And he has a whole life Alice isn’t a part of. Getting to know each other in reality isn’t as perfect as Alice always hoped.<br /><br />Alarmingly, when their dreams start to bleed into their waking hours, the pair realize that they might have to put an end to a lifetime of dreaming about each other. But when you fall in love in your dreams, can reality ever be enough?", book.getDescription());
     }
-    */
 
-
-    /** need to find a way to test this because numbers keep changing */
     @Test
     public void testGetRatingInfo() {
         assertTrue(3.66 == book.getAvgRating());
