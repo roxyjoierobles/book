@@ -197,6 +197,10 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(dist2);
             book.setDist1(dist1);
             distCount = true;
+        } else if (qName.equalsIgnoreCase("url") && !goodreadsCount) {
+            goodreads_link = builder.toString().trim();
+            book.setGoodreadsLink(goodreads_link);
+            goodreadsCount = true;
         } else if (qName.equalsIgnoreCase("name") && !nameCount) {
             name = builder.toString().trim();
             author = new Author(name);
@@ -229,7 +233,7 @@ public class BookHandler extends DefaultHandler {
 
 
         // TODO
-        // figure out how to get CDATA - goodreads url, description, author link
+        // figure out how to get CDATA - goodreads url, author link
 
         builder.setLength(0);
     }

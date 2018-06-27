@@ -66,11 +66,11 @@ public class BookParserTest {
         assertTrue(196 == book.getDist1());
     }
 
-    /** needs CDATA
      @Test
      public void testGetGoodreadsURL() {
+        assertEquals("https://www.goodreads.com/book/show/25817310-dreamology", book.getGoodreadsLink());
      }
-     */
+
 
     @Test
     public void testGetAuthorInfo() {
