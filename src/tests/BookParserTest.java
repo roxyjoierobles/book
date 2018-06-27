@@ -56,16 +56,17 @@ public class BookParserTest {
     */
 
 
+    /** need to find a way to test this because numbers keep changing */
     @Test
     public void testGetRatingInfo() {
         assertTrue(3.66 == book.getAvgRating());
-        assertTrue(26575 == book.getRatingsSum());
-        assertTrue(7262 == book.getRatingsCount());
-        assertTrue(1720 == book.getDist5());
-        assertTrue(2460 == book.getDist4());
-        assertTrue(2164 == book.getDist3());
-        assertTrue(725 == book.getDist2());
-        assertTrue(193 == book.getDist1());
+        assertTrue(26793 == book.getRatingsSum());
+        assertTrue(7323 == book.getRatingsCount());
+        assertTrue(1730 == book.getDist5());
+        assertTrue(2485 == book.getDist4());
+        assertTrue(2183 == book.getDist3());
+        assertTrue(729 == book.getDist2());
+        assertTrue(196 == book.getDist1());
     }
 
     /** needs CDATA
