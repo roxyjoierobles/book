@@ -52,8 +52,8 @@ public class BookHandler extends DefaultHandler {
     private String name;
     private String role;
     private String authorLink;
-    private Double authorAvgRating;
-    private String authorAvgRatingStr;
+    private Double authorRating;
+    private String authorRatingStr;
     private Integer authorRatingCount;
     private String authorRatingCountStr;
 
@@ -76,7 +76,8 @@ public class BookHandler extends DefaultHandler {
     private boolean authorCount = false;
     private boolean nameCount = false;
     private boolean roleCount = false;
-
+    private boolean aRatingCount = false;
+    private boolean authorRatingCountCount = false;
 
     private List<String> shelves;
 

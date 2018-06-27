@@ -4,6 +4,8 @@ package author;
 public class Author {
     public String name;
     public String role;
+    public Double rating;
+    public Integer ratingCount;
 
     public Author() {
         this.name = "";
@@ -31,6 +33,16 @@ public class Author {
         return this.role;
     }
 
+    // returns authors average rating
+    public Double getRating() {
+        return this.rating;
+    }
+
+    // returns rating count
+    public Integer getRatingCount() {
+        return this.ratingCount;
+    }
+
     // sets name of author
     public void setName(String name) {
         this.name = name;
@@ -39,6 +51,16 @@ public class Author {
     // sets role of author
     public void setRole(String role) {
         this.role = role;
+    }
+
+    // sets avg rating
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    // sets rating count
+    public void setRatingCount(Integer count) {
+        this.ratingCount = count;
     }
 
     @Override

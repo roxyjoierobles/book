@@ -7,7 +7,9 @@ import parsers.XMLBookParser;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BookParserTest {
-    private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
+    //private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
+    // using test.xml for book - Dreamology by Lucy Keating (to avoid changing review info)
+    private static final String FILE = "./data/test.xml";
     private static final double DELTA = 1.0e-8;  // tolerance for testing equality on doubles
     private Book book;
 
@@ -60,9 +62,9 @@ public class BookParserTest {
     @Test
     public void testGetRatingInfo() {
         assertTrue(3.66 == book.getAvgRating());
-        assertTrue(26793 == book.getRatingsSum());
-        assertTrue(7323 == book.getRatingsCount());
-        assertTrue(1730 == book.getDist5());
+        assertTrue(26798 == book.getRatingsSum());
+        assertTrue(7324 == book.getRatingsCount());
+        assertTrue(1731 == book.getDist5());
         assertTrue(2485 == book.getDist4());
         assertTrue(2183 == book.getDist3());
         assertTrue(729 == book.getDist2());
