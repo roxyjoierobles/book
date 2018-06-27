@@ -48,16 +48,6 @@ public class BookHandler extends DefaultHandler {
 
     private Book book;
 
-    private Author author;
-    private String name;
-    private String role;
-    private String authorLink;
-    private Double authorRating;
-    private String authorRatingStr;
-    private Integer authorRatingCount;
-    private String authorRatingCountStr;
-
-
     // counts for book to ensure each book is parse
     private boolean titleCount = false;
     private boolean imgCount = false;
@@ -72,12 +62,22 @@ public class BookHandler extends DefaultHandler {
     private boolean ratingsCountCount = false;
     private boolean distCount;
 
+
     // for author
+    private Author author;
+    private String name;
+    private String role;
+    private String authorLink;
+    private Double authorRating;
+    private String authorRatingStr;
+    private Integer authorRatingCount;
+    private String authorRatingCountStr;
+
     private boolean authorCount = false;
     private boolean nameCount = false;
     private boolean roleCount = false;
     private boolean aRatingCount = false;
-    private boolean authorRatingCountCount = false;
+    private boolean aRatingCounts = false;
 
     private List<String> shelves;
 
@@ -200,6 +200,11 @@ public class BookHandler extends DefaultHandler {
                 author.setRole(role);
             }
             roleCount = true;
+        } else if (qName.equalsIgnoreCase("average_rating") && !aRatingCount) {
+            authorRatingStr = builder.toString().trim();
+            authorRating = Double.parseDouble(authorRatingStr);
+            author.setRating(authorRating);
+            aRatingCount = true;
         } else if (qName.equalsIgnoreCase("similar_books")) {
             while (count != 0) {
                 Book similar = new Book();
