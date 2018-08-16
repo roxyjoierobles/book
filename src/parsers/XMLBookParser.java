@@ -9,6 +9,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class XMLBookParser implements IBookParser {
     private String source;
@@ -22,6 +24,8 @@ public class XMLBookParser implements IBookParser {
     @Override
     public Book parse() throws BookParsingException, IOException {
         Book book = new Book();
+        // list of books parsed --> last will be booked inputed
+        List<Book> books = new ArrayList<>();
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();

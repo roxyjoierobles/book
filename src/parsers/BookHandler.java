@@ -1,5 +1,8 @@
 package parsers;
 
+
+// ORIGINAL METHOD
+
 import author.Author;
 import books.Book;
 import org.xml.sax.Attributes;
@@ -7,8 +10,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class BookHandler extends DefaultHandler {
     private StringBuilder builder;
@@ -22,7 +25,6 @@ public class BookHandler extends DefaultHandler {
     private String publisher;
 
     private List<Book> similarBooks;
-    private int count = 0;
 
     private String avgRatingStr;
     private Double avgRating;
@@ -69,7 +71,6 @@ public class BookHandler extends DefaultHandler {
     private Author author;
     private String name;
     private String role;
-    private String authorLink;
     private Double authorRating;
     private String authorRatingStr;
 
@@ -78,43 +79,70 @@ public class BookHandler extends DefaultHandler {
     private boolean nameCount = false;
     private boolean roleCount = false;
     private boolean aRatingCount = false;
-    private boolean aLinkCount = false;
 
-    private List<String> shelves;
 
-    /*
-    // for cdata - isbn
-    private boolean cdatai = false;
+    private boolean inSimilar = false;
+    private Stack<Book> bookStack = new Stack<Book>();
+    private Stack elemStack = new Stack();
 
-    // for cdata - isbn13
-    private boolean cdatai13 = false;
-    */
+    public List<Book> books = new ArrayList<>();
+
 
     public BookHandler(Book book) {
         this.book = book;
         builder = new StringBuilder();
     }
 
+    // helper function
+    private Object currElem() {
+        return this.elemStack.peek();
+    }
+
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
-        builder.append(ch, start, length);
+        //builder.append(ch, start, length);
+        String val = new String(ch, start, length).trim();
+
+        // this handles the elem stack
+        if ("title".equals(currElem())) {
+            Book book = this.bookStack.peek();
+            book.setTitle(val);
+            //System.out.println(book.getTitle());
+        } else if ("isbn".equals(currElem())) {
+            Book book = this.bookStack.peek();
+            book.setISBN(val);
+        }
     }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
-        if (qName.equalsIgnoreCase("similar_books")) {
-            similarBooks = new ArrayList<>();
-            if (qName.equalsIgnoreCase("book")) {
-                count++;
-            }
+        this.elemStack.push(qName);
+        if (qName.equals("book")) {
+            Book b = new Book();
+            this.bookStack.push(b);
+
+            // there are 19 books in total --> book #19 (last in stack) is book inputed
+            // while the first 18 are the similar books of inputted title
+            System.out.println("book added to stack");
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         super.endElement(uri, localName, qName);
+        this.elemStack.pop();
+
+        // after books are completed parsing, it will be removed from stack and moved to list
+        // bottom of stack is inputed book while the rest is the similar books
+        // so the last book of list will be the inputed book
+        if ("book".equals(qName)) {
+            Book book = this.bookStack.pop();
+            this.books.add(book);
+        }
+
+        /*
         if (qName.equalsIgnoreCase("title") && !titleCount) {
             title = builder.toString().trim();
             book.setTitle(title);
@@ -171,7 +199,6 @@ public class BookHandler extends DefaultHandler {
         } else if (qName.equalsIgnoreCase("rating_dist") && !distCount) {
             String s = builder.toString().trim();
             List<String> dist = Arrays.asList(s.split(":"));
-            List<String> allDist = new ArrayList<>();
             // 1st string in allDist is 5
             // 2nd string is dist5|4
             dist5Str = dist.get(1).substring(0, dist.get(1).length() - 2);
@@ -219,26 +246,14 @@ public class BookHandler extends DefaultHandler {
             author.setRating(authorRating);
             aRatingCount = true;
         } else if (qName.equalsIgnoreCase("similar_books")) {
-            while (count != 0) {
-                Book similar = new Book();
-                if (qName.equalsIgnoreCase("title")) {
-                    title = builder.toString().trim();
-                    similar.setTitle(title);
-                }
-                book.addSimilarBook(similar);
-                count--;
-            }
+
         }
-
-
-        // TODO
-        // figure out how to get CDATA - goodreads url, author link
-
+        */
         builder.setLength(0);
     }
 
     // helper function for month publication
-    private void formatMonth(String month) {
+    public void formatMonth(String month) {
         if (month.equals("1")) {
             publicationMonth = "January";
         } else if (month.equals("2")) {
@@ -266,4 +281,3 @@ public class BookHandler extends DefaultHandler {
         }
     }
 }
-

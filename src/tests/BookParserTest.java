@@ -95,4 +95,9 @@ public class BookParserTest {
     }
     */
 
+   @Test
+    public void testGetSimilarBooks() {
+       //assertTrue(18 == book.getSimilarBooks().size());
+   }
+
 }

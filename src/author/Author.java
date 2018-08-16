@@ -5,6 +5,9 @@ public class Author {
     public String name;
     public String role;
     public Double rating;
+    public String img;
+    public String link;
+    public Integer ratingsCount;
 
     public Author() {
         this.name = "";
@@ -32,9 +35,24 @@ public class Author {
         return this.role;
     }
 
+    // returns authors rating count
+    public Integer getRatingsCount() {
+        return this.ratingsCount;
+    }
+
     // returns authors average rating
     public Double getRating() {
         return this.rating;
+    }
+
+    // returns image of author
+    public String getImg() {
+        return this.img;
+    }
+
+    // returns goodreads link of author
+    public String getLink() {
+        return this.link;
     }
 
     // sets name of author
@@ -50,6 +68,21 @@ public class Author {
     // sets avg rating
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    // sets ratings count
+    public void setRatingsCount(Integer count) {
+        this.ratingsCount = count;
+    }
+
+    // sets authors image
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    // sets authors goodreads page link
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @Override

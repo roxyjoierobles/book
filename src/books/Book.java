@@ -160,6 +160,10 @@ public class Book {
         return this.genres;
     }
 
+    // returns list of similar books
+    public List<Book> getSimilarBooks() {
+        return this.similarBooks;
+    }
 
     // sets title of book to given string
     public void setTitle(String title) {
@@ -172,9 +176,9 @@ public class Book {
     }
 
     // adds an author to additional authors of book
-    /*public void addAdditionalAuthor(Author author) {
+    public void addAdditionalAuthor(Author author) {
         this.additionalAuthors.add(author);
-    }*/
+    }
 
     // sets isbn
     public void setISBN(String isbn) {
@@ -272,7 +276,7 @@ public class Book {
     }
 
     // adds book to similar books
-    public void addSimilarBook(Book book) {
-        this.similarBooks.add(book);
+    public void setSimilarBooks(List<Book> books) {
+        this.similarBooks = books;
     }
 }
