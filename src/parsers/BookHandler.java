@@ -35,6 +35,9 @@ public class BookHandler extends DefaultHandler {
     private Stack elemStack = new Stack();
     private List elems = new ArrayList();
 
+    private Stack<Author> authorStack = new Stack<>();
+
+
     public List<Book> books = new ArrayList<>();
 
 
@@ -94,7 +97,8 @@ public class BookHandler extends DefaultHandler {
             Book b = (Book) this.bookStack.peek();
             Integer sum = Integer.parseInt(val);
             b.setRatingsSum(sum);
-        } else if ("ratings_count".equals(currElem())) {
+        }
+        else if ("ratings_count".equals(currElem())) {
             Book b = (Book) this.bookStack.peek();
             Integer count = Integer.parseInt(val);
             b.setRatingsCount(count);
@@ -132,8 +136,11 @@ public class BookHandler extends DefaultHandler {
             Book b = (Book) this.bookStack.peek();
             Double rating = Double.parseDouble(val);
             b.setAvgRating(rating);
+        } */
+        else if ("url".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setGoodreadsLink(val);
         }
-        */
     }
 
 
