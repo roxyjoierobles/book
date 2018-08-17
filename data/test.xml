@@ -40,11 +40,11 @@ For as long as Alice can remember, she has dreamed of Max. Together, they have t
         </description>
         <work>
             <id type="integer">43059287</id>
-            <books_count type="integer">31</books_count>
+            <books_count type="integer">3</books_count>
             <best_book_id type="integer">25817310</best_book_id>
-            <reviews_count type="integer">31928</reviews_count>
-            <ratings_sum type="integer">26798</ratings_sum>
-            <ratings_count type="integer">7324</ratings_count>
+            <reviews_count type="integer">32219</reviews_count>
+            <ratings_sum type="integer">27702</ratings_sum>
+            <ratings_count type="integer">758424</ratings_count>
             <text_reviews_count type="integer">1384</text_reviews_count>
             <original_publication_year type="integer">2016</original_publication_year>
             <original_publication_month type="integer">4</original_publication_month>
@@ -52,16 +52,16 @@ For as long as Alice can remember, she has dreamed of Max. Together, they have t
             <original_title>Dreamology</original_title>
             <original_language_id type="integer" nil="true"/>
             <media_type>book</media_type>
-            <rating_dist>5:1731|4:2485|3:2183|2:729|1:196|total:7324</rating_dist>
+            <rating_dist>5:1781|4:2565|3:2267|2:765|1:206|total:7584</rating_dist>
             <desc_user_id type="integer">17290119</desc_user_id>
             <default_chaptering_book_id type="integer" nil="true"/>
             <default_description_language_code nil="true"/>
         </work>
-        <average_rating>3.66</average_rating>
+        <average_rating>3.65</average_rating>
         <num_pages>...</num_pages>
         <format>...</format>
         <edition_information>...</edition_information>
-        <ratings_count>...</ratings_count>
+        <ratings_count><![CDATA[ 6496 ]]></ratings_count>
         <text_reviews_count>...</text_reviews_count>
         <url>
             <![CDATA[
@@ -136,7 +136,7 @@ https://images.gr-assets.com/books/1460011581m/22297294.jpg
                 <isbn/>
                 <isbn13/>
                 <average_rating>4.11</average_rating>
-                <ratings_count>3715</ratings_count>
+                <ratings_count>3872</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>5</publication_month>
                 <publication_day>17</publication_day>
@@ -178,7 +178,7 @@ https://images.gr-assets.com/books/1458745280m/25647300.jpg
                 <isbn>0062356046</isbn>
                 <isbn13>9780062356048</isbn13>
                 <average_rating>3.52</average_rating>
-                <ratings_count>1114</ratings_count>
+                <ratings_count>1132</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>4</publication_month>
                 <publication_day>26</publication_day>
@@ -220,7 +220,7 @@ https://images.gr-assets.com/books/1456424870m/25165389.jpg
                 <isbn/>
                 <isbn13/>
                 <average_rating>3.89</average_rating>
-                <ratings_count>1733</ratings_count>
+                <ratings_count>1805</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>12</publication_month>
                 <publication_day>27</publication_day>
@@ -262,7 +262,7 @@ https://images.gr-assets.com/books/1444760820m/26244548.jpg
                 <isbn>006238015X</isbn>
                 <isbn13>9780062380159</isbn13>
                 <average_rating>3.93</average_rating>
-                <ratings_count>3670</ratings_count>
+                <ratings_count>3945</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>5</publication_month>
                 <publication_day>31</publication_day>
@@ -308,7 +308,7 @@ https://images.gr-assets.com/books/1436552316m/24832518.jpg
                 <isbn>1481456539</isbn>
                 <isbn13>9781481456531</isbn13>
                 <average_rating>3.77</average_rating>
-                <ratings_count>1810</ratings_count>
+                <ratings_count>1873</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>6</publication_month>
                 <publication_day>14</publication_day>
@@ -349,8 +349,8 @@ https://images.gr-assets.com/books/1436842428m/25897851.jpg
                 </work>
                 <isbn>0544596323</isbn>
                 <isbn13>9780544596320</isbn13>
-                <average_rating>3.90</average_rating>
-                <ratings_count>1774</ratings_count>
+                <average_rating>3.89</average_rating>
+                <ratings_count>1828</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>5</publication_month>
                 <publication_day>3</publication_day>
@@ -392,7 +392,7 @@ https://images.gr-assets.com/books/1478538580m/25760792.jpg
                 <isbn>1510706186</isbn>
                 <isbn13>9781510706187</isbn13>
                 <average_rating>3.85</average_rating>
-                <ratings_count>2632</ratings_count>
+                <ratings_count>2809</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>11</publication_month>
                 <publication_day>8</publication_day>
@@ -434,7 +434,7 @@ https://images.gr-assets.com/books/1454621964m/28512629.jpg
                 <isbn>0062368567</isbn>
                 <isbn13>9780062368560</isbn13>
                 <average_rating>3.43</average_rating>
-                <ratings_count>1395</ratings_count>
+                <ratings_count>1448</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>9</publication_month>
                 <publication_day>6</publication_day>
@@ -475,8 +475,8 @@ https://images.gr-assets.com/books/1416179004m/22880504.jpg
                 </work>
                 <isbn>0062330713</isbn>
                 <isbn13>9780062330710</isbn13>
-                <average_rating>3.78</average_rating>
-                <ratings_count>632</ratings_count>
+                <average_rating>3.77</average_rating>
+                <ratings_count>645</ratings_count>
                 <publication_year>2015</publication_year>
                 <publication_month>4</publication_month>
                 <publication_day>28</publication_day>
@@ -517,8 +517,8 @@ https://images.gr-assets.com/books/1435248404m/22926200.jpg
                 </work>
                 <isbn>0062393960</isbn>
                 <isbn13>9780062393968</isbn13>
-                <average_rating>3.49</average_rating>
-                <ratings_count>1204</ratings_count>
+                <average_rating>3.50</average_rating>
+                <ratings_count>1242</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>3</publication_month>
                 <publication_day>1</publication_day>
@@ -561,8 +561,8 @@ https://images.gr-assets.com/books/1457102645m/25164304.jpg
                 </work>
                 <isbn>0062433253</isbn>
                 <isbn13>9780062433251</isbn13>
-                <average_rating>3.71</average_rating>
-                <ratings_count>7731</ratings_count>
+                <average_rating>3.72</average_rating>
+                <ratings_count>8269</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>11</publication_month>
                 <publication_day>22</publication_day>
@@ -603,8 +603,8 @@ https://images.gr-assets.com/books/1444755084m/24218983.jpg
                 </work>
                 <isbn/>
                 <isbn13/>
-                <average_rating>3.71</average_rating>
-                <ratings_count>580</ratings_count>
+                <average_rating>3.70</average_rating>
+                <ratings_count>586</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>5</publication_month>
                 <publication_day>10</publication_day>
@@ -645,8 +645,8 @@ https://images.gr-assets.com/books/1445622909m/26869838.jpg
                 </work>
                 <isbn>006232764X</isbn>
                 <isbn13>9780062327642</isbn13>
-                <average_rating>3.46</average_rating>
-                <ratings_count>545</ratings_count>
+                <average_rating>3.47</average_rating>
+                <ratings_count>557</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>6</publication_month>
                 <publication_day>28</publication_day>
@@ -687,8 +687,8 @@ https://images.gr-assets.com/books/1435248294m/17735579.jpg
                 </work>
                 <isbn>0062289926</isbn>
                 <isbn13>9780062289926</isbn13>
-                <average_rating>3.48</average_rating>
-                <ratings_count>1508</ratings_count>
+                <average_rating>3.49</average_rating>
+                <ratings_count>1553</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>3</publication_month>
                 <publication_day>15</publication_day>
@@ -733,8 +733,8 @@ https://images.gr-assets.com/books/1455846593m/28259094.jpg
                 </work>
                 <isbn>0062409115</isbn>
                 <isbn13>9780062409119</isbn13>
-                <average_rating>3.40</average_rating>
-                <ratings_count>988</ratings_count>
+                <average_rating>3.41</average_rating>
+                <ratings_count>1039</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>10</publication_month>
                 <publication_day>18</publication_day>
@@ -775,8 +775,8 @@ https://images.gr-assets.com/books/1435248358m/25708587.jpg
                 </work>
                 <isbn>0062351370</isbn>
                 <isbn13>9780062351371</isbn13>
-                <average_rating>3.67</average_rating>
-                <ratings_count>635</ratings_count>
+                <average_rating>3.68</average_rating>
+                <ratings_count>651</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>3</publication_month>
                 <publication_day>1</publication_day>
@@ -815,8 +815,8 @@ https://images.gr-assets.com/books/1455273881m/25167846.jpg
                 </work>
                 <isbn/>
                 <isbn13/>
-                <average_rating>3.59</average_rating>
-                <ratings_count>1908</ratings_count>
+                <average_rating>3.58</average_rating>
+                <ratings_count>1995</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>10</publication_month>
                 <publication_day>11</publication_day>
@@ -858,7 +858,7 @@ https://images.gr-assets.com/books/1435335984m/25796019.jpg
                 <isbn>0062337092</isbn>
                 <isbn13>9780062337092</isbn13>
                 <average_rating>2.92</average_rating>
-                <ratings_count>763</ratings_count>
+                <ratings_count>795</ratings_count>
                 <publication_year>2016</publication_year>
                 <publication_month>3</publication_month>
                 <publication_day>22</publication_day>

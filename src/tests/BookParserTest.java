@@ -59,14 +59,14 @@ public class BookParserTest {
 
     @Test
     public void testGetRatingInfo() {
-        //assertTrue(3.66 == book.getAvgRating());
-        //assertTrue(26798 == book.getRatingsSum());
-        //assertTrue(7324 == book.getRatingsCount());
-        assertTrue(1731 == book.getDist5());
-        assertTrue(2485 == book.getDist4());
-        assertTrue(2183 == book.getDist3());
-        assertTrue(729 == book.getDist2());
-        assertTrue(196 == book.getDist1());
+        //assertTrue(3.65 == book.getAvgRating());
+        //assertTrue(27702 == book.getRatingsSum());
+        //assertTrue(7584 == book.getRatingsCount());
+        assertTrue(1781 == book.getDist5());
+        assertTrue(2565 == book.getDist4());
+        assertTrue(2267 == book.getDist3());
+        assertTrue(765 == book.getDist2());
+        assertTrue(206 == book.getDist1());
     }
 
      @Test
