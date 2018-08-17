@@ -93,6 +93,11 @@ public class BookHandler extends DefaultHandler {
         builder = new StringBuilder();
     }
 
+    // helper function - returns list of books parsed
+    public List<Book> getBooks() {
+        return this.books;
+    }
+
     // helper function
     private Object currElem() {
         return this.elemStack.peek();
@@ -109,9 +114,6 @@ public class BookHandler extends DefaultHandler {
             Book book = this.bookStack.peek();
             book.setTitle(val);
             //System.out.println(book.getTitle());
-        } else if ("isbn".equals(currElem())) {
-            Book book = this.bookStack.peek();
-            book.setISBN(val);
         }
     }
 
