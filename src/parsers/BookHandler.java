@@ -10,62 +10,19 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class BookHandler extends DefaultHandler {
     private StringBuilder builder;
-    private String title;
-    private String isbn;
-    private String isbn13;
-    private String publicationYear;
-    private String publicationDay;
-    private String publicationMonth;
-    private String publicationMonthVal;
-    private String publisher;
-
-    private List<Book> similarBooks;
-
-    private String avgRatingStr;
-    private Double avgRating;
-    private String description;
-    private String img_url;
-    private String goodreads_link;
-
-    private String ratingsSumStr;
-    private Integer ratingsSum;;
-    private String ratingsCountStr;
-    private Integer ratingsCount;
-
-    private Integer dist5;
-    private String dist5Str;
-    private Integer dist4;
-    private String dist4Str;
-    private Integer dist3;
-    private String dist3Str;
-    private Integer dist2;
-    private String dist2Str;
-    private Integer dist1;
-    private String dist1Str;
 
     private Book book;
-
-    // counts for book to ensure each book is parse
-    private boolean titleCount = false;
-    private boolean isbnCount = false;
-    private boolean isbn13Count = false;
-    private boolean imgCount = false;
-    private boolean yearCount = false;
-    private boolean monthCount = false;
-    private boolean dayCount = false;
-    private boolean publisherCount = false;
-    private boolean descriptionCount = false;
-    private boolean goodreadsCount = false;
-    private boolean avgRatingCount = false;
-    private boolean ratingsSumCount = false;
-    private boolean ratingsCountCount = false;
-    private boolean distCount;
-
+    private String dist5;
+    private String dist4;
+    private String dist3;
+    private String dist2;
+    private String dist1;
 
     // for author
     private Author author;
@@ -74,16 +31,9 @@ public class BookHandler extends DefaultHandler {
     private Double authorRating;
     private String authorRatingStr;
 
-
-    private boolean authorCount = false;
-    private boolean nameCount = false;
-    private boolean roleCount = false;
-    private boolean aRatingCount = false;
-
-
-    private boolean inSimilar = false;
     private Stack<Book> bookStack = new Stack<Book>();
     private Stack elemStack = new Stack();
+    private List elems = new ArrayList();
 
     public List<Book> books = new ArrayList<>();
 
@@ -108,14 +58,84 @@ public class BookHandler extends DefaultHandler {
         super.characters(ch, start, length);
         //builder.append(ch, start, length);
         String val = new String(ch, start, length).trim();
-
-        // this handles the elem stack
-        if ("title".equals(currElem())) {
-            Book book = this.bookStack.peek();
-            book.setTitle(val);
-            //System.out.println(book.getTitle());
+        if (val.length() == 0) {
+            return;
+            //NEED TO FIGURE OUT HOW TO DEAL WITH CDATA (ISBN, ISBN13, ETC.)
+        } else if ("title".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setTitle(val);
+            //System.out.println(b.getTitle());
+        } else if ("isbn".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setISBN(val);
+        } else if ("isbn13".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setISBN13(val);
+        } else if ("publication_year".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setPublicationYear(val);
+        } else if ("publication_month".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            String month = formatMonth(val);
+            b.setPublicationMonth(month);
+        } else if ("publication_day".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setPublicationDay(val);
+            b.setPublicationDate(b.getPublicationYear(), b.getPublicationMonth(), b.getPublicationDay());
+        } else if ("publisher".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setPublisher(val);
+        } else if ("description".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            b.setDescription(val);
         }
+        /* NEED TO FIX
+        else if ("ratings_sum".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            Integer sum = Integer.parseInt(val);
+            b.setRatingsSum(sum);
+        } else if ("ratings_count".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            Integer count = Integer.parseInt(val);
+            b.setRatingsCount(count);
+        }
+        */
+        else if ("rating_dist".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            List<String> dist = Arrays.asList(val.split(":"));
+            // 1st string in allDist is 5
+            // 2nd string is dist5|4
+            dist5 = dist.get(1).substring(0, dist.get(1).length() - 2);
+            // 3rd string is dist4|3
+            dist4 = dist.get(2).substring(0, dist.get(2).length() - 2);
+            // 4th string is dist3|2
+            dist3 = dist.get(3).substring(0, dist.get(3).length() - 2);
+            // 5th string is dist2|1
+            dist2 = dist.get(4).substring(0, dist.get(4).length() - 2);
+            // 6th string is dist1|total
+            dist1 = dist.get(5).substring(0, dist.get(5).length() - 6);
+
+            Integer Dist5 = Integer.parseInt(dist5);
+            Integer Dist4 = Integer.parseInt(dist4);
+            Integer Dist3 = Integer.parseInt(dist3);
+            Integer Dist2 = Integer.parseInt(dist2);
+            Integer Dist1 = Integer.parseInt(dist1);
+
+            b.setDist5(Dist5);
+            b.setDist4(Dist4);
+            b.setDist3(Dist3);
+            b.setDist2(Dist2);
+            b.setDist1(Dist1);
+        }
+        /* NEED TO FIX RATING - GIVES 3.62 INSTEAD OF 3.66 (rating of author give)
+        else if ("average_rating".equals(currElem())) {
+            Book b = (Book) this.bookStack.peek();
+            Double rating = Double.parseDouble(val);
+            b.setAvgRating(rating);
+        }
+        */
     }
+
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -124,26 +144,23 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("book")) {
             Book b = new Book();
             this.bookStack.push(b);
-
-            // there are 19 books in total --> book #19 (last in stack) is book inputed
-            // while the first 18 are the similar books of inputted title
-            System.out.println("book added to stack");
         }
     }
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         super.endElement(uri, localName, qName);
+       //System.out.println(this.elemStack.peek());
         this.elemStack.pop();
 
-        // after books are completed parsing, it will be removed from stack and moved to list
-        // bottom of stack is inputed book while the rest is the similar books
-        // so the last book of list will be the inputed book
-        if ("book".equals(qName)) {
-            Book book = this.bookStack.pop();
-            this.books.add(book);
-        }
 
+        // at end of a book, it will be popped from stack and added to list
+        // last book in list is book with title that was inputted
+        if (qName.equals("book")) {
+            Book b = this.bookStack.pop();
+            this.books.add(b);
+            //System.out.println(b.getTitle());
+        }
         /*
         if (qName.equalsIgnoreCase("title") && !titleCount) {
             title = builder.toString().trim();
@@ -255,31 +272,32 @@ public class BookHandler extends DefaultHandler {
     }
 
     // helper function for month publication
-    public void formatMonth(String month) {
+    public String formatMonth(String month) {
         if (month.equals("1")) {
-            publicationMonth = "January";
+            return "January";
         } else if (month.equals("2")) {
-            publicationMonth = "February";
+            return  "February";
         } else if (month.equals("3")) {
-            publicationMonth =  "March";
+            return  "March";
         } else if (month.equals("4")) {
-            publicationMonth = "April";
+            return  "April";
         } else if (month.equals("5")) {
-            publicationMonth = "May";
+            return  "May";
         } else if (month.equals("6")) {
-            publicationMonth = "June";
+            return  "June";
         } else if (month.equals("7")) {
-            publicationMonth = "July";
+            return  "July";
         } else if (month.equals("8")) {
-            publicationMonth = "August";
+            return  "August";
         } else if (month.equals("9")) {
-            publicationMonth = "September";
+            return  "September";
         } else if (month.equals("10")) {
-            publicationMonth = "October";
+            return  "October";
         } else if (month.equals("11")) {
-            publicationMonth = "November";
+            return  "November";
         } else if (month.equals("12")) {
-            publicationMonth = "December";
+            return  "December";
         }
+        return "";
     }
 }

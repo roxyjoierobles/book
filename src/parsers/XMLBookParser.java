@@ -26,16 +26,15 @@ public class XMLBookParser implements IBookParser {
         Book book = new Book();
         // list of books parsed --> last will be booked inputed
         List<Book> books = new ArrayList<Book>();
+        List<Book> similar = new ArrayList<>();
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             BookHandler bh = new BookHandler(book);
             saxParser.parse(source, bh);
             books = bh.getBooks();
-            // book is last element in list of books parsed
             book = books.get(books.size() - 1);
-            // rest of the books are the similar books of inputted title
-            List similar = books.subList(0, books.size() - 1);
+            similar = books.subList(0, books.size() - 2);
             book.setSimilarBooks(similar);
         } catch (ParserConfigurationException pce) {
             BookParsingException bookParsingException = new BookParsingException("parsers Configuration Error");
