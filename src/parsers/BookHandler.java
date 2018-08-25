@@ -10,7 +10,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -22,6 +21,7 @@ public class BookHandler extends DefaultHandler {
     private String dist3;
     private String dist2;
     private String dist1;
+    private String ratingsCount;
 
     private Stack elemStack = new Stack();
 
@@ -93,30 +93,49 @@ public class BookHandler extends DefaultHandler {
         */
         else if ("rating_dist".equals(currElem())) {
             book = (Book) this.bookStack.peek();
-            List<String> dist = Arrays.asList(val.split(":"));
-            // 1st string in allDist is 5
-            // 2nd string is dist5|4
-            dist5 = dist.get(1).substring(0, dist.get(1).length() - 2);
-            // 3rd string is dist4|3
-            dist4 = dist.get(2).substring(0, dist.get(2).length() - 2);
-            // 4th string is dist3|2
-            dist3 = dist.get(3).substring(0, dist.get(3).length() - 2);
-            // 5th string is dist2|1
-            dist2 = dist.get(4).substring(0, dist.get(4).length() - 2);
-            // 6th string is dist1|total
-            dist1 = dist.get(5).substring(0, dist.get(5).length() - 6);
+            // note: val is in format: "5:1781|4:2565|3:2267|2:765|1:206|total:7584"
+           /*
+            String[] dist = val.split(":");
+            // dist[0] is "5"
+            // note: length - 2 becasue "|{number dist}" is included
+            // dist[1] is distribution for 5 stars
+            dist5 = dist[1].substring(0, dist[1].length() - 2);
+            // dist[2] is 4 star dist
+            dist4 = dist[2].substring(0, dist[2].length() - 2);
+            // dist[3] is 3 star
+            dist3 = dist[3].substring(0, dist[3].length() - 2);
+            // dist[4] is 2 star
+            dist2 = dist[4].substring(0, dist[4].length() - 2);
+            // dist[5] is 1 star
+            // note: length - 6 because "|total" is included
+            dist1 = dist[5].substring(0, dist[5].length() - 6);
+
+            // dist[6] is total ratings count
+            ratingsCount = dist[6];
+            */
+
+           String[] dist = val.split("|");
+           System.out.println(dist);
+           dist5 = dist[0].substring(2, dist[0].length());
+           dist4 = dist[1].substring(2, dist[1].length());
+           dist3 = dist[2].substring(2, dist[2].length());
+           dist2 = dist[3].substring(2, dist[3].length());
+           dist1 = dist[4].substring(2, dist[4].length());
+           ratingsCount = dist[5].substring(6, dist[5].length());
 
             Integer Dist5 = Integer.parseInt(dist5);
             Integer Dist4 = Integer.parseInt(dist4);
             Integer Dist3 = Integer.parseInt(dist3);
             Integer Dist2 = Integer.parseInt(dist2);
             Integer Dist1 = Integer.parseInt(dist1);
+            Integer rateCount = Integer.parseInt(ratingsCount);
 
             book.setDist5(Dist5);
             book.setDist4(Dist4);
             book.setDist3(Dist3);
             book.setDist2(Dist2);
             book.setDist1(Dist1);
+            book.setRatingsCount(rateCount);
         }
         /* TODO: NEED TO FIX RATING - GIVES 3.62 INSTEAD OF 3.66 (rating of author give)
         else if ("average_rating".equals(currElem())) {
@@ -129,7 +148,7 @@ public class BookHandler extends DefaultHandler {
             book.setGoodreadsLink(val);
         }
         // TODO: need to parse author info
-        else if ("name".equals(currElem())) {
+        /* else if ("name".equals(currElem())) {
             author = (Author) this.authorStack.peek();
             author.setName(val);
         } else if ("role".equals(currElem())) {
@@ -140,6 +159,7 @@ public class BookHandler extends DefaultHandler {
                 author.setRole(val);
             }
         }
+        */
     }
 
 
@@ -151,11 +171,13 @@ public class BookHandler extends DefaultHandler {
             book = new Book();
             this.bookStack.push(book);
         }
+        /*
         // doing something similar for author
         if (qName.equals("author")) {
             author = new Author();
             this.authorStack.push(author);
         }
+        *.
     }
 
     @Override
@@ -173,10 +195,12 @@ public class BookHandler extends DefaultHandler {
             //System.out.println(b.getTitle());
         }
 
+        /*
         if (qName.equals("author")) {
             author = this.authorStack.pop();
             this.authors.add(author);
         }
+        */
 
     }
 
