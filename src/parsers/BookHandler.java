@@ -51,7 +51,9 @@ public class BookHandler extends DefaultHandler {
         super.characters(ch, start, length);
         //builder.append(ch, start, length);
         String val = new String(ch, start, length).trim();
-        if ("title".equals(currElem())) {
+        if (val.length() == 0) {
+            return;
+        } else if ("title".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setTitle(val);
             //System.out.println(b.getTitle());
@@ -94,7 +96,6 @@ public class BookHandler extends DefaultHandler {
         else if ("rating_dist".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             // note: val is in format: "5:1781|4:2565|3:2267|2:765|1:206|total:7584"
-           /*
             String[] dist = val.split(":");
             // dist[0] is "5"
             // note: length - 2 becasue "|{number dist}" is included
@@ -112,16 +113,6 @@ public class BookHandler extends DefaultHandler {
 
             // dist[6] is total ratings count
             ratingsCount = dist[6];
-            */
-
-           String[] dist = val.split("|");
-           System.out.println(dist);
-           dist5 = dist[0].substring(2, dist[0].length());
-           dist4 = dist[1].substring(2, dist[1].length());
-           dist3 = dist[2].substring(2, dist[2].length());
-           dist2 = dist[3].substring(2, dist[3].length());
-           dist1 = dist[4].substring(2, dist[4].length());
-           ratingsCount = dist[5].substring(6, dist[5].length());
 
             Integer Dist5 = Integer.parseInt(dist5);
             Integer Dist4 = Integer.parseInt(dist4);
@@ -136,6 +127,9 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(Dist2);
             book.setDist1(Dist1);
             book.setRatingsCount(rateCount);
+
+
+
         }
         /* TODO: NEED TO FIX RATING - GIVES 3.62 INSTEAD OF 3.66 (rating of author give)
         else if ("average_rating".equals(currElem())) {
@@ -177,7 +171,7 @@ public class BookHandler extends DefaultHandler {
             author = new Author();
             this.authorStack.push(author);
         }
-        *.
+        */
     }
 
     @Override
