@@ -29,7 +29,6 @@ public class BookParserTest {
         assertEquals("Dreamology", book.getTitle());
     }
 
-    // NEED TO FIGURE OUT
     @Test
     public void testGetISBNs() {
         assertEquals("0062380001", book.getISBN());
@@ -61,7 +60,7 @@ public class BookParserTest {
     public void testGetRatingInfo() {
         //assertTrue(3.65 == book.getAvgRating());
         //assertTrue(27702 == book.getRatingsSum());
-        //assertTrue(7584 == book.getRatingsCount());
+        assertTrue(7584 == book.getRatingsCount());
         assertTrue(1781 == book.getDist5());
         assertTrue(2565 == book.getDist4());
         assertTrue(2267 == book.getDist3());
@@ -75,12 +74,14 @@ public class BookParserTest {
      }
 
 
+     /*
     @Test
     public void testGetAuthorInfo() {
         assertEquals("Lucy Keating", book.getAuthor().getName());
         assertEquals("author", book.getAuthor().getRole());
         assertTrue(3.62 == book.getAuthor().getRating());
     }
+    */
 
    /*
     @Test

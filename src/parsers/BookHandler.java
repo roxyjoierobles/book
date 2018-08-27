@@ -29,8 +29,9 @@ public class BookHandler extends DefaultHandler {
     public List<Book> books = new ArrayList<>();
 
     private Author author;
-    private Stack<Author> authorStack = new Stack<>();
+    private Stack<List<Author>> authorsStack = new Stack<>();
     private List<Author> authors = new ArrayList<>();
+    private AuthorHandler ah;
 
     public BookHandler(Book book) {
         this.book = book;
@@ -127,9 +128,6 @@ public class BookHandler extends DefaultHandler {
             book.setDist2(Dist2);
             book.setDist1(Dist1);
             book.setRatingsCount(rateCount);
-
-
-
         }
         /* TODO: NEED TO FIX RATING - GIVES 3.62 INSTEAD OF 3.66 (rating of author give)
         else if ("average_rating".equals(currElem())) {
@@ -140,20 +138,7 @@ public class BookHandler extends DefaultHandler {
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        }
-        // TODO: need to parse author info
-        /* else if ("name".equals(currElem())) {
-            author = (Author) this.authorStack.peek();
-            author.setName(val);
-        } else if ("role".equals(currElem())) {
-            author = (Author) this.authorStack.peek();
-            if (val.length() == 0) {
-                author.setRole("author");
-            } else {
-                author.setRole(val);
-            }
-        }
-        */
+        } 
     }
 
 
@@ -165,13 +150,13 @@ public class BookHandler extends DefaultHandler {
             book = new Book();
             this.bookStack.push(book);
         }
-        /*
         // doing something similar for author
-        if (qName.equals("author")) {
-            author = new Author();
-            this.authorStack.push(author);
+        // keeps track of # of author lists - # of book == # authors
+        // bottom author group is for book with inputted title
+        if (qName.equals("authors")) {
+            this.authorsStack.push(authors);
+
         }
-        */
     }
 
     @Override
@@ -189,12 +174,10 @@ public class BookHandler extends DefaultHandler {
             //System.out.println(b.getTitle());
         }
 
-        /*
-        if (qName.equals("author")) {
-            author = this.authorStack.pop();
-            this.authors.add(author);
+        if (qName.equals("authors")) {
+            // after goes through each list of authors for each book in xml file
+            authors = (List<Author>) this.authorsStack.pop();
         }
-        */
 
     }
 
