@@ -34,7 +34,7 @@ public class XMLBookParser implements IBookParser {
             saxParser.parse(source, bh);
             books = bh.getBooks();
             book = books.get(books.size() - 1);
-            similar = books.subList(0, books.size() - 2);
+            similar = books.subList(0, books.size() - 1);
             book.setSimilarBooks(similar);
         } catch (ParserConfigurationException pce) {
             BookParsingException bookParsingException = new BookParsingException("parsers Configuration Error");

@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 import parsers.IBookParser;
 import parsers.XMLBookParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BookParserTest {
@@ -74,34 +77,35 @@ public class BookParserTest {
      }
 
 
-
+/*
     @Test
     public void testGetAuthorInfo() {
         assertEquals("Lucy Keating", book.getAuthor().getName());
         assertEquals("author", book.getAuthor().getRole());
         assertTrue(3.62 == book.getAuthor().getRating());
     }
-
-
-   /*
-    @Test
-    public void testGetGenres() {
-        List<Genre> genres = new ArrayList<>();
-        genres.add(Genre.YOUNGADULT);
-        genres.add(Genre.CONTEMPORARY);
-        genres.add(Genre.ROMANCE);
-        genres.add(Genre.FICTION);
-        genres.add(Genre.FANTASY);
-        genres.add(Genre.MAGICALREALISM);
-        genres.add(Genre.SCIFI);
-        genres.add(Genre.PARANORMAL);
-        assertEquals(genres, book.getGenres());
-    }
     */
+
+
 
    @Test
     public void testGetSimilarBooks() {
-       //assertTrue(18 == book.getSimilarBooks().size());
+       assertEquals(18, book.getSimilarBooks().size());
+       // following is to see if all similar books were parsed
+       // checking by getting title for all books parsed not including inputted
+       // and checking if it has all 18 titles
+       List<String> similarTitles = new ArrayList<>();
+       for (Book b: book.similarBooks) {
+           similarTitles.add(b.getTitle());
+       }
+       assertTrue(similarTitles.contains("Girl Against the Universe"));
+       assertTrue(similarTitles.contains("Down with the Shine"));
+       assertTrue(similarTitles.contains("The Secret of a Heart Note"));
+       assertTrue(similarTitles.contains("Wanderlost"));
+
+
+
+
    }
 
 }

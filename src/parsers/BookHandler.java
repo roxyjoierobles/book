@@ -188,7 +188,7 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("book")) {
             book = this.bookStack.pop();
             this.books.add(book);
-            //System.out.println(b.getTitle());
+            //System.out.println(book.getTitle());
         }
 
         if (qName.equals("authors")) {
