@@ -12,6 +12,7 @@ import java.util.Stack;
 public class AuthorHandler extends DefaultHandler {
 
     private Author author;
+    private Author main;
     private List<Author> authors = new ArrayList<>();
     private Stack<Author> authorStack = new Stack<>();
 
@@ -33,6 +34,28 @@ public class AuthorHandler extends DefaultHandler {
         String val = new String(ch, start, length).trim();
         if (val.length() == 0) {
             return;
+        } else if ("name".equals(currElem())) {
+            author = (Author) this.authorStack.peek();
+            author.setName(val);
+        } else if ("link".equals(currElem())) {
+            author = (Author) this.authorStack.peek();
+            author.setLink(val);
+        } else if ("role".equals(currElem())) {
+            author = (Author) this.authorStack.peek();
+            if ("".equals(val)) {
+                author.setRole("author");
+                main = author;
+            } else {
+                author.setRole(val);
+            }
+        } else if ("average_rating".equals(currElem())) {
+            author = (Author) this.authorStack.peek();
+            Double rating = Double.parseDouble(val);
+            author.setRating(rating);
+        } else if ("ratings_count".equals(currElem())) {
+            author = (Author) this.authorStack.peek();
+            Integer ratingCount = Integer.parseInt(val);
+            author.setRatingsCount(ratingCount);
         }
     }
 
@@ -58,7 +81,22 @@ public class AuthorHandler extends DefaultHandler {
         // last book in list is book with title that was inputted
         if (qName.equals("author")) {
             author = this.authorStack.pop();
-            this.authors.add(author);
+
+            // authors added to list are additional authors
+            if (author != main) {
+                this.authors.add(author);
+            }
         }
     }
+
+    // function returns all authors parsed in file
+    public List<Author> getAuthors() {
+        return this.authors;
+    }
+
+    // function returns main author of book
+    public Author getMainAuthor() {
+        return this.main;
+    }
+
 }

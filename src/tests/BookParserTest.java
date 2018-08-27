@@ -74,14 +74,14 @@ public class BookParserTest {
      }
 
 
-     /*
+
     @Test
     public void testGetAuthorInfo() {
         assertEquals("Lucy Keating", book.getAuthor().getName());
         assertEquals("author", book.getAuthor().getRole());
         assertTrue(3.62 == book.getAuthor().getRating());
     }
-    */
+
 
    /*
     @Test

@@ -9,6 +9,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -30,7 +33,7 @@ public class BookHandler extends DefaultHandler {
 
     private Author author;
     private Stack<List<Author>> authorsStack = new Stack<>();
-    private List<Author> authors = new ArrayList<>();
+    private List<Author> authors;
     private AuthorHandler ah;
 
     public BookHandler(Book book) {
@@ -138,7 +141,21 @@ public class BookHandler extends DefaultHandler {
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        } 
+        } else if ("authors".equals(currElem())) {
+            book = (Book) this.bookStack.peek();
+            authors = (List<Author>) this.authorsStack.peek();
+            try {
+                SAXParserFactory factory = SAXParserFactory.newInstance();
+                SAXParser saxParser = factory.newSAXParser();
+                ah = new AuthorHandler(authors);
+                authors = ah.getAuthors();
+                author = ah.getMainAuthor();
+                book.setAuthor(author);
+                book.setAdditionalAuthors(authors);
+            } catch (ParserConfigurationException pce) {
+                pce.printStackTrace();
+            }
+        }
     }
 
 
@@ -154,8 +171,8 @@ public class BookHandler extends DefaultHandler {
         // keeps track of # of author lists - # of book == # authors
         // bottom author group is for book with inputted title
         if (qName.equals("authors")) {
+            authors = new ArrayList<>();
             this.authorsStack.push(authors);
-
         }
     }
 
