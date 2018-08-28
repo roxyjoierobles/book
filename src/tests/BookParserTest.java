@@ -102,10 +102,19 @@ public class BookParserTest {
        assertTrue(similarTitles.contains("Down with the Shine"));
        assertTrue(similarTitles.contains("The Secret of a Heart Note"));
        assertTrue(similarTitles.contains("Wanderlost"));
-
-
-
-
+       assertTrue(similarTitles.contains("The Geek's Guide to Unrequited Love"));
+       assertTrue(similarTitles.contains("Suffer Love"));
+       assertTrue(similarTitles.contains("Timekeeper (Timekeeper, #1)"));
+       assertTrue(similarTitles.contains("Diplomatic Immunity"));
+       assertTrue(similarTitles.contains("Trouble from the Start"));
+       assertTrue(similarTitles.contains("The Lifeboat Clique"));
+       assertTrue(similarTitles.contains("Of Fire and Stars (Of Fire and Stars, #1)"));
+       assertTrue(similarTitles.contains("Even if the Sky Falls"));
+       assertTrue(similarTitles.contains("A Season for Fireflies"));
+       assertTrue(similarTitles.contains("A Drop of Night"));
+       assertTrue(similarTitles.contains("I'm Not Your Manic Pixie Dream Girl"));
+       assertTrue(similarTitles.contains("The Leaving Season"));
+       assertTrue(similarTitles.contains("Beast"));
+       assertTrue(similarTitles.contains("Harmony House"));
    }
-
 }
