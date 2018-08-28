@@ -141,7 +141,9 @@ public class BookHandler extends DefaultHandler {
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        } else if ("authors".equals(currElem())) {
+        }
+        // TODO: NEED TO FIX AUTHORS PARSING
+        else if ("authors".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             authors = (List<Author>) this.authorsStack.peek();
             try {
@@ -182,18 +184,12 @@ public class BookHandler extends DefaultHandler {
        //System.out.println(this.elemStack.peek());
         this.elemStack.pop();
 
-
         // at end of a book, it will be popped from stack and added to list
         // last book in list is book with title that was inputted
         if (qName.equals("book")) {
             book = this.bookStack.pop();
             this.books.add(book);
-            //System.out.println(book.getTitle());
-        }
-
-        if (qName.equals("authors")) {
-            // after goes through each list of authors for each book in xml file
-            authors = (List<Author>) this.authorsStack.pop();
+            System.out.println(book.getTitle());
         }
 
     }

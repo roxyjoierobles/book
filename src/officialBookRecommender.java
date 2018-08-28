@@ -2,7 +2,10 @@ import books.Book;
 import parsers.IBookParser;
 import parsers.XMLBookParser;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Scanner;
 
@@ -25,13 +28,14 @@ public class officialBookRecommender {
         System.out.println("book entered: " + book_title);
         try {
             URL_SOURCE = URL + URLEncoder.encode(book_title, "UTF-8");
-        } catch (UnsupportedEncodingException uee) {
-            uee.printStackTrace();
-        }
-        System.out.println("url: " + URL_SOURCE);
-        try {
+            System.out.println("url: " + URL_SOURCE);
             IBookParser parser = new XMLBookParser(URL_SOURCE);
             book = parser.parse();
+            System.out.println(book.getTitle());
+            java.net.URL url = new URL(book.getImgURL());
+            BufferedImage urlImg = ImageIO.read(url);
+        } catch (UnsupportedEncodingException uee) {
+            uee.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
