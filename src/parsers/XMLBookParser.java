@@ -1,14 +1,17 @@
 package parsers;
 
 import books.Book;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class XMLBookParser implements IBookParser {
@@ -23,8 +26,22 @@ public class XMLBookParser implements IBookParser {
     }
 
     @Override
-    public Book parse() throws BookParsingException, IOException {
+    public Book parse() throws BookParsingException, IOException{
         Book book = new Book();
+
+        try {
+            reader = XMLReaderFactory.createXMLReader();
+            BookHandler bh = new BookHandler(book);
+            reader.setContentHandler(bh);
+            reader.parse(new InputSource(new URL(source).openStream()));
+        }catch (SAXException se) {
+            BookParsingException bookParsingException = new BookParsingException("SAX parsers Error");
+            bookParsingException.initCause(se);
+            throw bookParsingException;
+        }
+
+
+        /*
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
@@ -47,6 +64,8 @@ public class XMLBookParser implements IBookParser {
             bookParsingException.initCause(mue);
             throw bookParsingException;
         }
+        */
+        System.out.println("title:"+book.getTitle());
         return book;
     }
 }
