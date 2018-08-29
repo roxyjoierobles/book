@@ -23,15 +23,28 @@ public class XMLBookParser implements IBookParser {
     }
 
     @Override
-    public Book parse() throws BookParsingException, IOException {
+    public Book parse() throws BookParsingException, IOException{
         Book book = new Book();
+        /*
+        try {
+            reader = XMLReaderFactory.createXMLReader();
+            BookHandler bh = new BookHandler(book);
+            reader.setContentHandler(bh);
+            reader.parse(new InputSource(new URL(source).openStream()));
+        }catch (SAXException se) {
+            BookParsingException bookParsingException = new BookParsingException("SAX parsers Error");
+            bookParsingException.initCause(se);
+            throw bookParsingException;
+        }
+        */
+
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             BookHandler bh = new BookHandler(book);
             saxParser.parse(source, bh);
             books = bh.getBooks();
-            book = books.get(books.size());
+            book = books.get(books.size() - 1);
             similar = books.subList(0, books.size() - 1);
             book.setSimilarBooks(similar);
         } catch (ParserConfigurationException pce) {
@@ -47,6 +60,7 @@ public class XMLBookParser implements IBookParser {
             bookParsingException.initCause(mue);
             throw bookParsingException;
         }
+        System.out.println("title:"+book.getTitle());
         return book;
     }
 }
