@@ -87,11 +87,6 @@ public class BookHandler extends DefaultHandler {
             Integer sum = Integer.parseInt(val);
             b.setRatingsSum(sum);
         }
-        else if ("ratings_count".equals(currElem())) {
-            Book b = (Book) this.bookStack.peek();
-            Integer count = Integer.parseInt(val);
-            b.setRatingsCount(count);
-        }
         */
         else if ("rating_dist".equals(currElem())) {
             book = (Book) this.bookStack.peek();
