@@ -60,7 +60,7 @@ public class XMLBookParser implements IBookParser {
             bookParsingException.initCause(mue);
             throw bookParsingException;
         }
-        System.out.println("title:"+book.getTitle());
+        System.out.println("title: "+book.getTitle());
         return book;
     }
 }

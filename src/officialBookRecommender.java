@@ -27,9 +27,10 @@ public class officialBookRecommender {
             System.out.println("url: " + URL_SOURCE);
             IBookParser parser = new XMLBookParser(URL_SOURCE);
             book = parser.parse();
-            System.out.println("this?" + book.getTitle());
-            //java.net.URL url = new URL(book.getImgURL());
-            //BufferedImage urlImg = ImageIO.read(url);
+            System.out.println("\n books you should read: ");
+            for (Book b : book.getSimilarBooks()) {
+                System.out.println(b.getTitle());
+            }
         } catch (UnsupportedEncodingException uee) {
             uee.printStackTrace();
         } catch (Exception e) {
