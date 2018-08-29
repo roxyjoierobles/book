@@ -60,7 +60,6 @@ public class BookHandler extends DefaultHandler {
         } else if ("title".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setTitle(val);
-            //System.out.println(b.getTitle());
         } else if ("isbn".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setISBN(val);
@@ -190,6 +189,7 @@ public class BookHandler extends DefaultHandler {
             book = this.bookStack.pop();
             this.books.add(book);
             System.out.println(book.getTitle());
+            //System.out.println("size: "+books.size());
         }
 
     }

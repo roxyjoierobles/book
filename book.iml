@@ -9,10 +9,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="JUnit5">
+      <library name="jUnit 5 RC3">
         <CLASSES>
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/junit-jupiter-api-5.0.0-RC2.jar!/" />
-          <root url="jar://$APPLICATION_HOME_DIR$/plugins/junit/lib/opentest4j-1.0.0-RC1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../BCS/CPSC210/Labs/cpsc210_d10_project17/lib/junit-jupiter-api-5.0.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
