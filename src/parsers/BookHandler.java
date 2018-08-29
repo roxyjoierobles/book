@@ -1,8 +1,5 @@
 package parsers;
 
-
-// ORIGINAL METHOD
-
 import author.Author;
 import books.Book;
 import org.xml.sax.Attributes;
