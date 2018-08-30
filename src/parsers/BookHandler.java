@@ -67,6 +67,9 @@ public class BookHandler extends DefaultHandler {
         } else if ("isbn13".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setISBN13(val);
+        } else if ("image_url".equals(currElem()) && !inAuthor) {
+            book = (Book) this.bookStack.peek();
+            book.setImgURL(val);
         } else if ("publication_year".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setPublicationYear(val);
