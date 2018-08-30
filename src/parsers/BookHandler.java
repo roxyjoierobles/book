@@ -89,12 +89,7 @@ public class BookHandler extends DefaultHandler {
             book = (Book) this.bookStack.peek();
             Integer sum = Integer.parseInt(val);
             book.setRatingsSum(sum);
-        } else if ("average_rating".equals(currElem()) && !inAuthor) {
-            book = (Book) this.bookStack.peek();
-            Double rating = Double.parseDouble(val);
-            book.setAvgRating(rating);
-        }
-        else if ("rating_dist".equals(currElem())) {
+        } else if ("rating_dist".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             // note: val is in format: "5:1781|4:2565|3:2267|2:765|1:206|total:7584"
             String[] dist = val.split(":");
@@ -129,12 +124,11 @@ public class BookHandler extends DefaultHandler {
             book.setDist1(Dist1);
             book.setRatingsCount(rateCount);
         }
-        /* TODO: NEED TO FIX RATING - GIVES 3.62 INSTEAD OF 3.66 (rating of author give)
-        else if ("average_rating".equals(currElem())) {
+        else if ("average_rating".equals(currElem()) && !inAuthor) {
             Book b = (Book) this.bookStack.peek();
             Double rating = Double.parseDouble(val);
             b.setAvgRating(rating);
-        } */
+        }
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);

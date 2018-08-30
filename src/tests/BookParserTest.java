@@ -61,7 +61,7 @@ public class BookParserTest {
 
     @Test
     public void testGetRatingInfo() {
-        //assertTrue(3.65 == book.getAvgRating());
+        assertTrue(3.65 == book.getAvgRating());
         assertTrue(27702 == book.getRatingsSum());
         assertTrue(7584 == book.getRatingsCount());
         assertTrue(1781 == book.getDist5());
