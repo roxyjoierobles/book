@@ -6,9 +6,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -33,7 +30,7 @@ public class BookHandler extends DefaultHandler {
     public List<Book> books = new ArrayList<>();
 
     private Author author;
-    private Stack<List<Author>> authorsStack = new Stack<>();
+    private Stack<Author> authorsStack = new Stack<>();
     private List<Author> authors;
     private AuthorHandler ah;
 
@@ -139,6 +136,7 @@ public class BookHandler extends DefaultHandler {
         // TODO: NEED TO FIX AUTHORS PARSING
         else if ("authors".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            /*
             authors = (List<Author>) this.authorsStack.peek();
             try {
                 SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -151,6 +149,8 @@ public class BookHandler extends DefaultHandler {
             } catch (ParserConfigurationException pce) {
                 pce.printStackTrace();
             }
+            */
+
         }
     }
 
@@ -166,9 +166,13 @@ public class BookHandler extends DefaultHandler {
         // doing something similar for author
         // keeps track of # of author lists - # of book == # authors
         // bottom author group is for book with inputted title
-        if (qName.equals("authors")) {
+        if (qName.equals("author")) {
+            /*
             authors = new ArrayList<>();
             this.authorsStack.push(authors);
+            */
+            author = new Author();
+            this.authorsStack.push(author);
             inAuthor = true;
         }
     }
@@ -185,7 +189,17 @@ public class BookHandler extends DefaultHandler {
             book = this.bookStack.pop();
             this.books.add(book);
             // System.out.println(book.getTitle());
-            //System.out.println("size: "+books.size());
+            //System.out.println("size: " + books.size());
+        }
+
+        if (qName.equals("authors")) {
+            book = this.bookStack.peek();
+            author = this.authorsStack.pop();
+            if (author.getRole() == "author") {
+                book.setAuthor(author);
+            } else {
+                book.addAdditionalAuthors(author);
+            }
         }
 
     }

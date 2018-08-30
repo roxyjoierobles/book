@@ -175,9 +175,14 @@ public class Book {
         this.author = author;
     }
 
-    // adds an author to additional authors of book
+    // makes additional authors of book
     public void setAdditionalAuthors(List<Author> authors) {
         this.additionalAuthors = authors;
+    }
+
+    // adds an author to additional authors of book
+    public void addAdditionalAuthors(Author author) {
+        this.additionalAuthors.add(author);
     }
 
     // sets isbn
