@@ -26,8 +26,11 @@ public class BookHandler extends DefaultHandler {
 
     // ran into trouble with book title for book "Trouble from the Start"
     // took title from "series_work" qName, need to ensure this doesnt happen
-    // this will always be false
     private boolean inSeriesWork = false;
+
+    // for some reason the author of inputted book is Libraries
+    // the reason it is doing this is because there is "name" in book_links
+    private boolean inBookLinks = false;
 
     private Stack elemStack = new Stack();
 
@@ -36,8 +39,6 @@ public class BookHandler extends DefaultHandler {
 
     private Author author;
     private Stack<Author> authorsStack = new Stack<>();
-    private List<Author> authors;
-    private AuthorHandler ah;
 
     public BookHandler(Book book) {
         this.book = book;
@@ -130,18 +131,33 @@ public class BookHandler extends DefaultHandler {
             book.setRatingsCount(rateCount);
         }
         else if ("average_rating".equals(currElem()) && !inAuthor) {
-            Book b = (Book) this.bookStack.peek();
+            book = (Book) this.bookStack.peek();
             Double rating = Double.parseDouble(val);
-            b.setAvgRating(rating);
+            book.setAvgRating(rating);
         }
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        }
-        // TODO: for some reason the author of inputted book is Libraries
-        // NEED TO FIX
-        else if ("name".equals(currElem()) && inAuthor) {
+        } else if ("name".equals(currElem()) && inAuthor && !inBookLinks) {
+            author = (Author) this.authorsStack.peek();
             author.setName(val);
+        } else if ("role".equals(currElem())) {
+            author = (Author) this.authorsStack.peek();
+            author.setRole(val);
+        } else if ("average_rating".equals(currElem()) && inAuthor) {
+            author = (Author) this.authorsStack.peek();
+            Double rating = Double.parseDouble(val);
+            author.setRating(rating);
+        } else if ("link".equals(currElem()) && inAuthor) {
+            author = (Author) this.authorsStack.peek();
+            author.setLink(val);
+        } else if ("ratings_count".equals(currElem()) && inAuthor) {
+            author = (Author) this.authorsStack.peek();
+            Integer count = Integer.parseInt(val);
+            author.setRatingsCount(count);
+        } else if ("small_image_url".equals(currElem()) && inAuthor) {
+            author = (Author) this.authorsStack.peek();
+            author.setImg(val);
         }
     }
 
@@ -158,13 +174,12 @@ public class BookHandler extends DefaultHandler {
         // keeps track of # of author lists - # of book == # authors
         // bottom author group is for book with inputted title
         if (qName.equals("author")) {
-            /*
-            authors = new ArrayList<>();
-            this.authorsStack.push(authors);
-            */
             author = new Author();
             this.authorsStack.push(author);
             inAuthor = true;
+        }
+        if (qName.equals("book_link")) {
+            inBookLinks = true;
         }
     }
 
@@ -177,18 +192,26 @@ public class BookHandler extends DefaultHandler {
         // at end of a book, it will be popped from stack and added to list
         // last book in list is book with title that was inputted
         if (qName.equals("book")) {
-            book = this.bookStack.pop();
+            book = (Book) this.bookStack.pop();
             this.books.add(book);
             // System.out.println(book.getTitle());
             //System.out.println("size: " + books.size());
         }
 
-        if (qName.equals("authors")) {
+        if (qName.equals("author")) {
             book = this.bookStack.peek();
-            author = this.authorsStack.pop();
-            if (!author.getName().equals("Libraries")) {
+            author = (Author) this.authorsStack.pop();
+            if (author.getRole().equals("")) {
+                author.setRole("author");
                 book.setAuthor(author);
+            } else {
+                book.addAdditionalAuthors(author);
             }
+            inAuthor = false;
+        }
+
+        if (qName.equals("book_link")) {
+            inBookLinks = false;
         }
 
     }

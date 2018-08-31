@@ -81,6 +81,9 @@ public class BookParserTest {
         assertEquals("Lucy Keating", book.getAuthor().getName());
         assertEquals("author", book.getAuthor().getRole());
         assertTrue(3.62 == book.getAuthor().getRating());
+        assertEquals("https://www.goodreads.com/author/show/9809970.Lucy_Keating", book.getAuthor().getLink());
+        assertTrue(8275 == book.getAuthor().getRatingsCount());
+        assertEquals("https://images.gr-assets.com/authors/1425358382p2/9809970.jpg", book.getAuthor().getImg());
     }
 
 
@@ -91,9 +94,13 @@ public class BookParserTest {
        // checking by getting title for all books parsed not including inputted
        // and checking if it has all 18 titles
        List<String> similarTitles = new ArrayList<>();
+       List<String> similarTitlesAuthors = new ArrayList<>();
+
        for (Book b: book.similarBooks) {
            similarTitles.add(b.getTitle());
+           similarTitlesAuthors.add(b.getAuthor().getName());
        }
+       // tests to see if all titles are parsed
        assertTrue(similarTitles.contains("Girl Against the Universe"));
        assertTrue(similarTitles.contains("Down with the Shine"));
        assertTrue(similarTitles.contains("The Secret of a Heart Note"));
@@ -112,5 +119,26 @@ public class BookParserTest {
        assertTrue(similarTitles.contains("The Leaving Season"));
        assertTrue(similarTitles.contains("Beast"));
        assertTrue(similarTitles.contains("Harmony House"));
+
+       // tests to see if all authors were parsed
+       assertTrue(similarTitlesAuthors.contains("Paula Stokes"));
+       assertTrue(similarTitlesAuthors.contains("Kate Karyus Quinn"));
+       assertTrue(similarTitlesAuthors.contains("Stacey Lee"));
+       assertTrue(similarTitlesAuthors.contains("Jen Malone"));
+       assertTrue(similarTitlesAuthors.contains("Sarvenaz Tash"));
+       assertTrue(similarTitlesAuthors.contains("Ashley Herring Blake"));
+       assertTrue(similarTitlesAuthors.contains("Tara Sim"));
+       assertTrue(similarTitlesAuthors.contains("Brodi Ashton"));
+       assertTrue(similarTitlesAuthors.contains("Rachel Hawthorne"));
+       assertTrue(similarTitlesAuthors.contains("Kathy Parks"));
+       assertTrue(similarTitlesAuthors.contains("Audrey Coulthurst"));
+       assertTrue(similarTitlesAuthors.contains("Mia Garcia"));
+       assertTrue(similarTitlesAuthors.contains("Rebecca Maizel"));
+       assertTrue(similarTitlesAuthors.contains("Stefan Bachmann"));
+       assertTrue(similarTitlesAuthors.contains("Gretchen McNeil"));
+       assertTrue(similarTitlesAuthors.contains("Cat Jordan"));
+       assertTrue(similarTitlesAuthors.contains("Brie Spangler"));
+       assertTrue(similarTitlesAuthors.contains("Nic Sheff"));
+
    }
 }
