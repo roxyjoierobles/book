@@ -1,3 +1,3 @@
 # book recommender
 
-in the works - actually started in may 2018
+in the works - actually started in june 2018
