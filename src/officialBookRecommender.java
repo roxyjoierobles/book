@@ -38,7 +38,13 @@ public class officialBookRecommender {
             System.out.println("You have read: " + book.getTitle());
             System.out.println("\n So here are some books you should read: ");
             for (Book b : book.getSimilarBooks()) {
-                System.out.println(b.getTitle() + b.getAvgRating());
+                System.out.println(b.getTitle());
+                // takes book titles and recursively calls bookhandler for each book in similar
+                //TODO - before able to do the following need to parse author so that it can use the right book
+
+                parser = new XMLBookParser(URL + URLEncoder.encode(b.getTitle(), "UTF-8"));
+                b = parser.parse();
+                System.out.println(b.getTitle() + " " + b.getAvgRating());
             }
             // initializes array of ratings
             bookRatings = new Double[book.getSimilarBooks().size()];
@@ -58,6 +64,7 @@ public class officialBookRecommender {
                 }
                 bookRatings[pos] = temp;
             }
+
             // still working on the following
             // need to include due to goodreads api terms and conditions
             System.out.println("\n \n \n all data and info is from Goodreads");

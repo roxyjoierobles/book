@@ -24,6 +24,11 @@ public class BookHandler extends DefaultHandler {
     // i.e. imageUrl, link, average_rating, ratings_count
     private boolean inAuthor = false;
 
+    // ran into trouble with book title for book "Trouble from the Start"
+    // took title from "series_work" qName, need to ensure this doesnt happen
+    // this will always be false
+    private boolean inSeriesWork = false;
+
     private Stack elemStack = new Stack();
 
     private Stack<Book> bookStack = new Stack<Book>();
@@ -55,7 +60,7 @@ public class BookHandler extends DefaultHandler {
         String val = new String(ch, start, length).trim();
         if (val.length() == 0) {
             return;
-        } else if ("title".equals(currElem())) {
+        } else if ("title".equals(currElem()) && !inSeriesWork) {
             book = (Book) this.bookStack.peek();
             book.setTitle(val);
         } else if ("isbn".equals(currElem())) {
@@ -133,8 +138,9 @@ public class BookHandler extends DefaultHandler {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
         }
+        // TODO: for some reason the author of inputted book is Libraries
+        // NEED TO FIX
         else if ("name".equals(currElem()) && inAuthor) {
-            author = (Author) this.authorsStack.peek();
             author.setName(val);
         }
     }
@@ -144,7 +150,6 @@ public class BookHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
         this.elemStack.push(qName);
-        System.out.println(qName);
         if (qName.equals("book")) {
             book = new Book();
             this.bookStack.push(book);
@@ -180,13 +185,10 @@ public class BookHandler extends DefaultHandler {
 
         if (qName.equals("authors")) {
             book = this.bookStack.peek();
-            /* author = this.authorsStack.pop();
-            if (author.getRole() == "author") {
+            author = this.authorsStack.pop();
+            if (!author.getName().equals("Libraries")) {
                 book.setAuthor(author);
-            } else {
-                book.addAdditionalAuthors(author);
             }
-            */
         }
 
     }
