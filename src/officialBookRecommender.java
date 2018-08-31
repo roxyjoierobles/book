@@ -19,6 +19,10 @@ public class officialBookRecommender {
 
     private static Book book;
 
+    // used to sort list of books to recommended by greatest rating -> least
+    private static Double[] bookRatings;
+
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String book_title;
@@ -34,9 +38,26 @@ public class officialBookRecommender {
             System.out.println("You have read: " + book.getTitle());
             System.out.println("\n So here are some books you should read: ");
             for (Book b : book.getSimilarBooks()) {
-                System.out.println(b.getTitle());
+                System.out.println(b.getTitle() + b.getAvgRating());
+            }
+            // initializes array of ratings
+            bookRatings = new Double[book.getSimilarBooks().size()];
+            // puts all the book ratings into array
+            for (int i = 0; i < book.getSimilarBooks().size(); i++) {
+                bookRatings[i] = book.getAvgRating();
             }
 
+            System.out.println("\n books arranged from least to greatest rating");
+            // following sorts list by insertion sort
+            for (int j = 1; j < bookRatings.length; j++) {
+                Double temp = bookRatings[j];
+                int pos = j;
+                while (pos > 0 && bookRatings[pos - 1] > temp) {
+                    bookRatings[pos] = bookRatings[pos - 1];
+                    pos--;
+                }
+                bookRatings[pos] = temp;
+            }
             // still working on the following
             // need to include due to goodreads api terms and conditions
             System.out.println("\n \n \n all data and info is from Goodreads");

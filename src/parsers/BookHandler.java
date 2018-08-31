@@ -133,24 +133,9 @@ public class BookHandler extends DefaultHandler {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
         }
-        // TODO: NEED TO FIX AUTHORS PARSING
-        else if ("authors".equals(currElem())) {
-            book = (Book) this.bookStack.peek();
-            /*
-            authors = (List<Author>) this.authorsStack.peek();
-            try {
-                SAXParserFactory factory = SAXParserFactory.newInstance();
-                SAXParser saxParser = factory.newSAXParser();
-                ah = new AuthorHandler(authors);
-                authors = ah.getAuthors();
-                author = ah.getMainAuthor();
-                book.setAuthor(author);
-                book.setAdditionalAuthors(authors);
-            } catch (ParserConfigurationException pce) {
-                pce.printStackTrace();
-            }
-            */
-
+        else if ("name".equals(currElem()) && inAuthor) {
+            author = (Author) this.authorsStack.peek();
+            author.setName(val);
         }
     }
 
@@ -159,6 +144,7 @@ public class BookHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         super.startElement(uri, localName, qName, attributes);
         this.elemStack.push(qName);
+        System.out.println(qName);
         if (qName.equals("book")) {
             book = new Book();
             this.bookStack.push(book);
@@ -194,12 +180,13 @@ public class BookHandler extends DefaultHandler {
 
         if (qName.equals("authors")) {
             book = this.bookStack.peek();
-            author = this.authorsStack.pop();
+            /* author = this.authorsStack.pop();
             if (author.getRole() == "author") {
                 book.setAuthor(author);
             } else {
                 book.addAdditionalAuthors(author);
             }
+            */
         }
 
     }
