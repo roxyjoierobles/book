@@ -20,7 +20,7 @@ public class officialBookRecommender {
     private static Book book;
 
     // used to sort list of books to recommended by greatest rating -> least
-    private static Double[] bookRatings;
+    private static Book[] bookRatings;
 
 
     public static void main(String[] args) {
@@ -36,34 +36,38 @@ public class officialBookRecommender {
             IBookParser parser = new XMLBookParser(URL_SOURCE);
             book = parser.parse();
             System.out.println("You have read: " + book.getTitle());
-            System.out.println("\n So here are some books you should read: ");
             for (Book b : book.getSimilarBooks()) {
-                System.out.println(b.getTitle());
+                // System.out.println(b.getTitle());
                 // takes book titles and recursively calls bookhandler for each book in similar
-                //TODO - before able to do the following need to parse author so that it can use the right book
-
-                parser = new XMLBookParser(URL + URLEncoder.encode(b.getTitle(), "UTF-8"));
+                // format for url: https://www.goodreads.com/book/title.xml?author=Arthur+Conan+Doyle&key=mb40XFLSOsxeK6aQ2Q&title=Hound+of+the+Baskervilles
+                parser = new XMLBookParser(URL_BASE + "author=" + URLEncoder.encode(b.getAuthor().getName(), "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(b.getTitle(), "UTF-8"));
                 b = parser.parse();
-                System.out.println(b.getTitle() + " " + b.getAvgRating());
+                //System.out.println("\n So here are some books you should read (unsorted): ");
+                //System.out.println(b.getTitle() + " " + b.getAvgRating());
             }
-            // initializes array of ratings
-            bookRatings = new Double[book.getSimilarBooks().size()];
+            // initializes array of books s.t. the ratings are sorted greatest -> least
+            bookRatings = new Book[book.getSimilarBooks().size()];
             // puts all the book ratings into array
             for (int i = 0; i < book.getSimilarBooks().size(); i++) {
-                bookRatings[i] = book.getAvgRating();
+                bookRatings[i] = book.getSimilarBooks().get(i);
             }
-
-            System.out.println("\n books arranged from least to greatest rating");
+            System.out.println("\n books arranged from greatests to least rating");
             // following sorts list by insertion sort
-            for (int j = 1; j < bookRatings.length; j++) {
-                Double temp = bookRatings[j];
+            for (int j = 1; j < bookRatings.length - 1; j++) {
+                Book temp = bookRatings[j];
                 int pos = j;
-                while (pos > 0 && bookRatings[pos - 1] > temp) {
+                while (pos > 0 && bookRatings[pos - 1].getAvgRating() < temp.getAvgRating()) {
                     bookRatings[pos] = bookRatings[pos - 1];
                     pos--;
                 }
                 bookRatings[pos] = temp;
             }
+
+            for (Book b : bookRatings) {
+                System.out.println(b.getTitle() + " " + b.getAvgRating());
+            }
+
+
 
             // still working on the following
             // need to include due to goodreads api terms and conditions

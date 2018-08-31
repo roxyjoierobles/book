@@ -26,11 +26,12 @@ public class BookHandler extends DefaultHandler {
 
     // ran into trouble with book title for book "Trouble from the Start"
     // took title from "series_work" qName, need to ensure this doesnt happen
-    private boolean inSeriesWork = false;
+    private boolean inSeries = false;
 
     // for some reason the author of inputted book is Libraries
     // the reason it is doing this is because there is "name" in book_links
     private boolean inBookLinks = false;
+    private boolean inBuyLinks = false;
 
     private Stack elemStack = new Stack();
 
@@ -61,7 +62,7 @@ public class BookHandler extends DefaultHandler {
         String val = new String(ch, start, length).trim();
         if (val.length() == 0) {
             return;
-        } else if ("title".equals(currElem()) && !inSeriesWork) {
+        } else if ("title".equals(currElem()) && !inSeries) {
             book = (Book) this.bookStack.peek();
             book.setTitle(val);
         } else if ("isbn".equals(currElem())) {
@@ -138,7 +139,7 @@ public class BookHandler extends DefaultHandler {
         else if ("url".equals(currElem())) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        } else if ("name".equals(currElem()) && inAuthor && !inBookLinks) {
+        } else if ("name".equals(currElem()) && inAuthor && !inBookLinks && !inBuyLinks) {
             author = (Author) this.authorsStack.peek();
             author.setName(val);
         } else if ("role".equals(currElem())) {
@@ -178,8 +179,8 @@ public class BookHandler extends DefaultHandler {
             this.authorsStack.push(author);
             inAuthor = true;
         }
-        if (qName.equals("book_link")) {
-            inBookLinks = true;
+        if (qName.equals("series")) {
+            inSeries = true;
         }
     }
 
@@ -208,10 +209,6 @@ public class BookHandler extends DefaultHandler {
                 book.addAdditionalAuthors(author);
             }
             inAuthor = false;
-        }
-
-        if (qName.equals("book_link")) {
-            inBookLinks = false;
         }
 
     }

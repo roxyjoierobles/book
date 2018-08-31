@@ -95,10 +95,12 @@ public class BookParserTest {
        // and checking if it has all 18 titles
        List<String> similarTitles = new ArrayList<>();
        List<String> similarTitlesAuthors = new ArrayList<>();
+       List<Double> similarRatings = new ArrayList<>();
 
        for (Book b: book.similarBooks) {
            similarTitles.add(b.getTitle());
            similarTitlesAuthors.add(b.getAuthor().getName());
+           similarRatings.add(b.getAvgRating());
        }
        // tests to see if all titles are parsed
        assertTrue(similarTitles.contains("Girl Against the Universe"));
@@ -139,6 +141,5 @@ public class BookParserTest {
        assertTrue(similarTitlesAuthors.contains("Cat Jordan"));
        assertTrue(similarTitlesAuthors.contains("Brie Spangler"));
        assertTrue(similarTitlesAuthors.contains("Nic Sheff"));
-
    }
 }
