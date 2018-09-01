@@ -179,9 +179,6 @@ public class BookHandler extends DefaultHandler {
             this.authorsStack.push(author);
             inAuthor = true;
         }
-        if (qName.equals("series")) {
-            inSeries = true;
-        }
     }
 
     @Override

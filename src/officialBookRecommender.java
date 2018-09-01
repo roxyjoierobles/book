@@ -25,31 +25,23 @@ public class officialBookRecommender {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        String book_title;
         System.out.print("Enter book title: ");
-        String book_title = input.next();
+        book_title = input.next();
         book_title += input.nextLine();
-        System.out.println("Enter author name. If you do not know, please input 'idk':" );
-        String book_author = input.next();
-        book_author += input.nextLine();
         //System.out.println("book entered: " + book_title);
         try {
-            if (book_author.equals("idk")) {
-                URL_SOURCE = URL + URLEncoder.encode(book_title, "UTF-8");
-            } else {
-                URL_SOURCE = URL_BASE + "author=" + URLEncoder.encode(book_author, "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(book_title, "UTF-8");
-            }
-            //System.out.println("url: " + URL_SOURCE);
+            URL_SOURCE = URL + URLEncoder.encode(book_title, "UTF-8");
+            System.out.println("url: " + URL_SOURCE);
             IBookParser parser = new XMLBookParser(URL_SOURCE);
             book = parser.parse();
-            System.out.println("You have read: " + book.getTitle() + " by " + book.getAuthor().getName());
-
-            System.out.println("please wait...");
+            System.out.println("You have read: " + book.getTitle());
             for (Book b : book.getSimilarBooks()) {
-                // System.out.println(b.getTitle());
+                 System.out.println(b.getTitle() + b.getAuthor().getName());
                 // takes book titles and recursively calls bookhandler for each book in similar
                 // format for url: https://www.goodreads.com/book/title.xml?author=Arthur+Conan+Doyle&key=mb40XFLSOsxeK6aQ2Q&title=Hound+of+the+Baskervilles
-                parser = new XMLBookParser(URL_BASE + "author=" + URLEncoder.encode(b.getAuthor().getName(), "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(b.getTitle(), "UTF-8"));
-                b = parser.parse();
+                IBookParser parser1 = new XMLBookParser(URL_BASE + "author=" + URLEncoder.encode(b.getAuthor().getName(), "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(b.getTitle(), "UTF-8"));
+                b = parser1.parse();
                 //System.out.println("\n So here are some books you should read (unsorted): ");
                 //System.out.println(b.getTitle() + " " + b.getAvgRating());
             }
@@ -59,7 +51,7 @@ public class officialBookRecommender {
             for (int i = 0; i < book.getSimilarBooks().size(); i++) {
                 bookRatings[i] = book.getSimilarBooks().get(i);
             }
-            System.out.println("Here are some books you can read, arranged from greatest to least avg rating");
+            System.out.println("\n books arranged from greatest to least rating");
             // following sorts list by insertion sort
             for (int j = 1; j < bookRatings.length - 1; j++) {
                 Book temp = bookRatings[j];
@@ -72,7 +64,7 @@ public class officialBookRecommender {
             }
 
             for (Book b : bookRatings) {
-                System.out.println(b.getTitle() + " " + b.getAvgRating());
+                System.out.println(b.getTitle() + "by " + b.getAuthor().getName() + " " + b.getAvgRating());
             }
 
 
