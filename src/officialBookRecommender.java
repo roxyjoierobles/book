@@ -59,7 +59,7 @@ public class officialBookRecommender {
             for (int i = 0; i < book.getSimilarBooks().size(); i++) {
                 bookRatings[i] = book.getSimilarBooks().get(i);
             }
-            System.out.println("Here are some books you can read, arranged from greatest to least rating");
+            System.out.println("Here are some books you can read, arranged from greatest to least avg rating");
             // following sorts list by insertion sort
             for (int j = 1; j < bookRatings.length - 1; j++) {
                 Book temp = bookRatings[j];
