@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Book {
     public String title;
-    // temporarily made author a string
     public Author author;
 
     public List<Author> additionalAuthors;
@@ -171,13 +170,8 @@ public class Book {
     }
 
     // sets author of book to given
-    public void setAuthor(Author author) {
+    public void addAuthor(Author author) {
         this.author = author;
-    }
-
-    // makes additional authors of book
-    public void setAdditionalAuthors(List<Author> authors) {
-        this.additionalAuthors = authors;
     }
 
     // adds an author to additional authors of book

@@ -37,7 +37,8 @@ public class officialBookRecommender {
             book = parser.parse();
             System.out.println("You have read: " + book.getTitle());
             for (Book b : book.getSimilarBooks()) {
-                 System.out.println(b.getTitle() + b.getAuthor().getName());
+                // first author in list of getAuthors() should be the "main"
+                System.out.println(b.getTitle() + b.getAuthor());
                 // takes book titles and recursively calls bookhandler for each book in similar
                 // format for url: https://www.goodreads.com/book/title.xml?author=Arthur+Conan+Doyle&key=mb40XFLSOsxeK6aQ2Q&title=Hound+of+the+Baskervilles
                 IBookParser parser1 = new XMLBookParser(URL_BASE + "author=" + URLEncoder.encode(b.getAuthor().getName(), "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(b.getTitle(), "UTF-8"));

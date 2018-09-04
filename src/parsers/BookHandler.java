@@ -24,6 +24,8 @@ public class BookHandler extends DefaultHandler {
     // i.e. imageUrl, link, average_rating, ratings_count
     private boolean inAuthor = false;
 
+    private boolean inSimilar = false;
+
     // ran into trouble with book title for book "Trouble from the Start"
     // took title from "series_work" qName, need to ensure this doesnt happen
     private boolean inSeries = false;
@@ -136,7 +138,14 @@ public class BookHandler extends DefaultHandler {
             Double rating = Double.parseDouble(val);
             book.setAvgRating(rating);
         }
-        else if ("url".equals(currElem())) {
+        // for similar
+            else if ("ratings_count".equals(currElem()) && !inAuthor && inSimilar) {
+            book = (Book) this.bookStack.peek();
+            Integer rateCount = Integer.parseInt(val);
+            book.setRatingsCount(rateCount);
+
+        }
+        else if ("link".equals(currElem()) && !inBuyLinks && !inBookLinks && !inAuthor) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
         } else if ("name".equals(currElem()) && inAuthor && !inBookLinks && !inBuyLinks) {
@@ -179,6 +188,17 @@ public class BookHandler extends DefaultHandler {
             this.authorsStack.push(author);
             inAuthor = true;
         }
+
+        if (qName.equals("book_links")) {
+            inBookLinks = true;
+        }
+        if (qName.equals("buy_links")) {
+            inBuyLinks = true;
+        }
+
+        if (qName.equals("similar_books")) {
+            inSimilar = true;
+        }
     }
 
     @Override
@@ -199,14 +219,23 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("author")) {
             book = this.bookStack.peek();
             author = (Author) this.authorsStack.pop();
-            book.addAdditionalAuthors(author);
             if (author.getRole().equals("") && author != null) {
                 author.setRole("author");
-                book.setAuthor(author);
+                book.addAuthor(author);
             } else {
                 book.addAdditionalAuthors(author);
             }
             inAuthor = false;
+        }
+
+        if (qName.equals("book_links")) {
+            inBookLinks = false;
+        }
+        if (qName.equals("buy_links")) {
+            inBuyLinks = false;
+        }
+        if (qName.equals("similar_books")) {
+            inSimilar = false;
         }
 
     }
