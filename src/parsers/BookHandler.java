@@ -61,6 +61,7 @@ public class BookHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
         //builder.append(ch, start, length);
+
         String val = new String(ch, start, length).trim();
         if (val.length() == 0) {
             return;
