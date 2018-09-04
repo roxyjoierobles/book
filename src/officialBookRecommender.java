@@ -29,16 +29,30 @@ public class officialBookRecommender {
         System.out.print("Enter book title: ");
         book_title = input.next();
         book_title += input.nextLine();
-        //System.out.println("book entered: " + book_title);
+        System.out.println("Enter author's name, type 'idk' if you don't know");
+        String book_author = input.next();
+        book_author += input.nextLine();
+        String author = "";
+        String[] authorsName = book_author.split(" ");
+        for (String s : authorsName) {
+            author += s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase() + " ";
+        }
+        System.out.println("book entered: " + book_title + " by " + author);
         try {
-            URL_SOURCE = URL + URLEncoder.encode(book_title, "UTF-8");
+            if (book_author.equals("idk")) {
+                URL_SOURCE = URL + URLEncoder.encode(book_title, "UTF-8");
+            } else {
+                URL_SOURCE = URL_BASE + "author=" + URLEncoder.encode(author, "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(book_title, "UTF-8");;
+            }
             System.out.println("url: " + URL_SOURCE);
             IBookParser parser = new XMLBookParser(URL_SOURCE);
             book = parser.parse();
-            System.out.println("You have read: " + book.getTitle());
+            System.out.println("You have read: " + book.getTitle() + " " + book.getAuthor().getName());
+
+            System.out.println("please wait ... ");
             for (Book b : book.getSimilarBooks()) {
                 // first author in list of getAuthors() should be the "main"
-                System.out.println(b.getTitle() + " " + b.getAuthor().getName());
+                //System.out.println(b.getTitle() + " " + b.getAuthor().getName());
                 // takes book titles and recursively calls bookhandler for each book in similar
                 // format for url: https://www.goodreads.com/book/title.xml?author=Arthur+Conan+Doyle&key=mb40XFLSOsxeK6aQ2Q&title=Hound+of+the+Baskervilles
                 IBookParser parser1 = new XMLBookParser(URL_BASE + "author=" + URLEncoder.encode(b.getAuthor().getName(), "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(b.getTitle(), "UTF-8"));
@@ -65,7 +79,7 @@ public class officialBookRecommender {
             }
 
             for (Book b : bookRatings) {
-                System.out.println(b.getTitle() + "by " + b.getAuthor().getName() + " " + b.getAvgRating());
+                System.out.println(b.getTitle() + " by " + b.getAuthor().getName() + " " + b.getAvgRating());
             }
 
 
