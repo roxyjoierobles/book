@@ -65,7 +65,7 @@ public class BookHandler extends DefaultHandler {
         builder.append(ch, start, length);
         String val;
         //String val = new String(ch, start, length).trim();
-        
+
         if ("title".equals(currElem()) && !inSeries) {
             book = (Book) this.bookStack.peek();
             val = builder.toString().trim();
