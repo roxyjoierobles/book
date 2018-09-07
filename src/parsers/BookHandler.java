@@ -43,6 +43,8 @@ public class BookHandler extends DefaultHandler {
     private Author author;
     private Stack<Author> authorsStack = new Stack<>();
 
+    private StringBuilder builder = new StringBuilder();
+
     public BookHandler(Book book) {
         this.book = book;
     }
@@ -60,50 +62,56 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
-
+        builder.append(ch, start, length);
+        String val;
         //String val = new String(ch, start, length).trim();
-        String val = String.copyValueOf(ch, start, length).trim();
-        // replaces all special characters
-        val = val.replace("&", "&amp;");
-        val = val.replace(" ' ", " \' ");
-        if (val.length() == 0) {
-            return;
-        } else if ("title".equals(currElem()) && !inSeries) {
+        
+        if ("title".equals(currElem()) && !inSeries) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setTitle(val);
         } else if ("isbn".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setISBN(val);
         } else if ("isbn13".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setISBN13(val);
         } else if ("image_url".equals(currElem()) && !inAuthor) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setImgURL(val);
         } else if ("publication_year".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setPublicationYear(val);
         } else if ("publication_month".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             String month = formatMonth(val);
             book.setPublicationMonth(month);
         } else if ("publication_day".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setPublicationDay(val);
             book.setPublicationDate(book.getPublicationYear(), book.getPublicationMonth(), book.getPublicationDay());
         } else if ("publisher".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setPublisher(val);
         } else if ("description".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setDescription(val);
-        }
-        else if ("ratings_sum".equals(currElem()) && !inAuthor) {
+        } else if ("ratings_sum".equals(currElem()) && !inAuthor) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             Integer sum = Integer.parseInt(val);
             book.setRatingsSum(sum);
         } else if ("rating_dist".equals(currElem())) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             // note: val is in format: "5:1781|4:2565|3:2267|2:765|1:206|total:7584"
             String[] dist = val.split(":");
             // dist[0] is "5"
@@ -139,40 +147,50 @@ public class BookHandler extends DefaultHandler {
         }
         else if ("average_rating".equals(currElem()) && !inAuthor) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             Double rating = Double.parseDouble(val);
             book.setAvgRating(rating);
         }
         // for similar
             else if ("ratings_count".equals(currElem()) && !inAuthor && inSimilar) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             Integer rateCount = Integer.parseInt(val);
             book.setRatingsCount(rateCount);
         }
         else if ("url".equals(currElem()) && !inBuyLinks && !inBookLinks && !inAuthor) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setGoodreadsLink(val);
         } else if ("link".equals(currElem()) && inSimilar && !inAuthor) {
             book = (Book) this.bookStack.peek();
+            val = builder.toString().trim();
             book.setGoodreadsLink(val);
         } else if ("name".equals(currElem()) && inAuthor && !inBookLinks && !inBuyLinks) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             author.setName(val);
         } else if ("role".equals(currElem())) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             author.setRole(val);
         } else if ("average_rating".equals(currElem()) && inAuthor) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             Double rating = Double.parseDouble(val);
             author.setRating(rating);
         } else if ("link".equals(currElem()) && inAuthor) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             author.setLink(val);
         } else if ("ratings_count".equals(currElem()) && inAuthor) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             Integer count = Integer.parseInt(val);
             author.setRatingsCount(count);
         } else if ("small_image_url".equals(currElem()) && inAuthor) {
             author = (Author) this.authorsStack.peek();
+            val = builder.toString().trim();
             author.setImg(val);
         }
     }
@@ -238,6 +256,7 @@ public class BookHandler extends DefaultHandler {
             if (qName.equals("similar_books")) {
                 inSimilar = false;
             }
+            builder.setLength(0);
     }
 
     // helper function for month publication
