@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+
 public class XMLBookParser implements IBookParser {
     private String source;
     private XMLReader reader;
@@ -25,24 +26,20 @@ public class XMLBookParser implements IBookParser {
     @Override
     public Book parse() throws BookParsingException, IOException{
         Book book = new Book();
-        /*
-        try {
-            reader = XMLReaderFactory.createXMLReader();
-            BookHandler bh = new BookHandler(book);
-            reader.setContentHandler(bh);
-            reader.parse(new InputSource(new URL(source).openStream()));
-        }catch (SAXException se) {
-            BookParsingException bookParsingException = new BookParsingException("SAX parsers Error");
-            bookParsingException.initCause(se);
-            throw bookParsingException;
-        }
-        */
 
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             BookHandler bh = new BookHandler(book);
             saxParser.parse(source, bh);
+            /*
+            URL url = new URL(source);
+            InputStream in = url.openStream();
+            XMLReader xmlreader = XMLReaderFactory.createXMLReader();
+            BookHandler bh = new BookHandler(book);
+            xmlreader.setContentHandler(bh);
+            InputSource inputSource = new InputSource(in);
+            xmlreader.parse(inputSource);*/
             books = bh.getBooks();
             book = books.get(books.size() - 1);
             similar = books.subList(0, books.size() - 1);
@@ -51,7 +48,7 @@ public class XMLBookParser implements IBookParser {
             BookParsingException bookParsingException = new BookParsingException("parsers Configuration Error");
             bookParsingException.initCause(pce);
             throw bookParsingException;
-        } catch (SAXException se) {
+        }  catch (SAXException se) {
             BookParsingException bookParsingException = new BookParsingException("SAX parsers Error");
             bookParsingException.initCause(se);
             throw bookParsingException;

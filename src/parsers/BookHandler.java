@@ -60,9 +60,12 @@ public class BookHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
-        //builder.append(ch, start, length);
 
-        String val = new String(ch, start, length).trim();
+        //String val = new String(ch, start, length).trim();
+        String val = String.copyValueOf(ch, start, length).trim();
+        // replaces all special characters
+        val = val.replace("&", "&amp;");
+        val = val.replace(" ' ", " \' ");
         if (val.length() == 0) {
             return;
         } else if ("title".equals(currElem()) && !inSeries) {
