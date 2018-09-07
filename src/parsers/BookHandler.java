@@ -144,12 +144,11 @@ public class BookHandler extends DefaultHandler {
             book = (Book) this.bookStack.peek();
             Integer rateCount = Integer.parseInt(val);
             book.setRatingsCount(rateCount);
-
         }
         else if ("url".equals(currElem()) && !inBuyLinks && !inBookLinks && !inAuthor) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
-        } else if ("link".equals(currElem()) && !inAuthor && inSimilar) {
+        } else if ("link".equals(currElem()) && inSimilar && !inAuthor) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
         } else if ("name".equals(currElem()) && inAuthor && !inBookLinks && !inBuyLinks) {
@@ -223,13 +222,12 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("author")) {
             book = this.bookStack.peek();
             author = (Author) this.authorsStack.pop();
-            if (author.getRole().equals("") && author != null) {
+            if (author.getRole().equals("")) {
                 author.setRole("author");
                 book.addAuthor(author);
                 inAuthor = false;
             }
         }
-
             if (qName.equals("book_links")) {
                 inBookLinks = false;
             }
