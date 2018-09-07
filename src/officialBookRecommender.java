@@ -52,7 +52,7 @@ public class officialBookRecommender {
                     URL_SOURCE = URL_BASE + "author=" + URLEncoder.encode(author, "UTF-8") + "&key=" + KEY + "&title=" + URLEncoder.encode(book_title, "UTF-8");
                     ;
                 }
-                //System.out.println("url: " + URL_SOURCE);
+                System.out.println("url: " + URL_SOURCE);
                 IBookParser parser = new XMLBookParser(URL_SOURCE);
                 book = parser.parse();
                 System.out.println("You have read: " + book.getTitle() + " " + book.getAuthor().getName());
