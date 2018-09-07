@@ -8,7 +8,6 @@ public class Book {
     public String title;
     public Author author;
 
-    public List<Author> additionalAuthors;
     public String isbn;
     public String isbn13;
     private String publicationYear;
@@ -57,11 +56,6 @@ public class Book {
     // return author of book
     public Author getAuthor() {
         return this.author;
-    }
-
-    // returns additional authors
-    public List<Author> getAdditionalAuthors() {
-        return this.additionalAuthors;
     }
 
     // returns isbn
@@ -172,11 +166,6 @@ public class Book {
     // sets author of book to given
     public void addAuthor(Author author) {
         this.author = author;
-    }
-
-    // adds an author to additional authors of book
-    public void addAdditionalAuthors(Author author) {
-        this.additionalAuthors.add(author);
     }
 
     // sets isbn

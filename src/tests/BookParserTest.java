@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BookParserTest {
     //private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
     // using test.xml for book - Dreamology by Lucy Keating (to avoid changing review info)
-    // to make it easer, instead of 18 similar to parse, there is only 3
+    // to make it easier, instead of 18 similar to parse, there is only 3
     private static final String FILE = "./data/test.xml";
     private static final double DELTA = 1.0e-8;  // tolerance for testing equality on doubles
     private Book book;

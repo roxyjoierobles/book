@@ -146,7 +146,10 @@ public class BookHandler extends DefaultHandler {
             book.setRatingsCount(rateCount);
 
         }
-        else if ("link".equals(currElem()) && !inBuyLinks && !inBookLinks && !inAuthor) {
+        else if ("url".equals(currElem()) && !inBuyLinks && !inBookLinks && !inAuthor) {
+            book = (Book) this.bookStack.peek();
+            book.setGoodreadsLink(val);
+        } else if ("link".equals(currElem()) && !inAuthor && inSimilar) {
             book = (Book) this.bookStack.peek();
             book.setGoodreadsLink(val);
         } else if ("name".equals(currElem()) && inAuthor && !inBookLinks && !inBuyLinks) {
@@ -223,22 +226,19 @@ public class BookHandler extends DefaultHandler {
             if (author.getRole().equals("") && author != null) {
                 author.setRole("author");
                 book.addAuthor(author);
-            } else {
-                book.addAdditionalAuthors(author);
+                inAuthor = false;
             }
-            inAuthor = false;
         }
 
-        if (qName.equals("book_links")) {
-            inBookLinks = false;
-        }
-        if (qName.equals("buy_links")) {
-            inBuyLinks = false;
-        }
-        if (qName.equals("similar_books")) {
-            inSimilar = false;
-        }
-
+            if (qName.equals("book_links")) {
+                inBookLinks = false;
+            }
+            if (qName.equals("buy_links")) {
+                inBuyLinks = false;
+            }
+            if (qName.equals("similar_books")) {
+                inSimilar = false;
+            }
     }
 
     // helper function for month publication
