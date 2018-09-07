@@ -222,11 +222,9 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("author")) {
             book = this.bookStack.peek();
             author = (Author) this.authorsStack.pop();
-            if (author.getRole().equals("")) {
-                author.setRole("author");
-                book.addAuthor(author);
-                inAuthor = false;
-            }
+            author.setRole("author");
+            book.addAuthor(author);
+            inAuthor = false;
         }
             if (qName.equals("book_links")) {
                 inBookLinks = false;
