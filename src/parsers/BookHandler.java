@@ -223,6 +223,9 @@ public class BookHandler extends DefaultHandler {
         if (qName.equals("similar_books")) {
             inSimilar = true;
         }
+        if (qName.equals("series")) {
+            inSeries = true;
+        }
     }
 
     @Override
@@ -247,16 +250,20 @@ public class BookHandler extends DefaultHandler {
             book.addAuthor(author);
             inAuthor = false;
         }
-            if (qName.equals("book_links")) {
-                inBookLinks = false;
-            }
-            if (qName.equals("buy_links")) {
-                inBuyLinks = false;
-            }
-            if (qName.equals("similar_books")) {
-                inSimilar = false;
-            }
-            builder.setLength(0);
+        if (qName.equals("book_links")) {
+            inBookLinks = false;
+        }
+        if (qName.equals("buy_links")) {
+            inBuyLinks = false;
+        }
+        if (qName.equals("similar_books")) {
+            inSimilar = false;
+        }
+
+        if (qName.equals("series")) {
+            inSeries = false;
+        }
+        builder.setLength(0);
     }
 
     // helper function for month publication

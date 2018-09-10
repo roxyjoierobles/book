@@ -49,7 +49,7 @@ public class officialBookRecommender {
                 //System.out.println("url: " + URL_SOURCE);
                 IBookParser parser = new XMLBookParser(URL_SOURCE);
                 book = parser.parse();
-                System.out.println("You have read: " + book.getTitle() + " by" + book.getAuthor().getName());
+                System.out.println("You have read: " + book.getTitle() + " by " + book.getAuthor().getName());
 
                 System.out.println("please wait ... ");
                 for (Book b : book.getSimilarBooks()) {
