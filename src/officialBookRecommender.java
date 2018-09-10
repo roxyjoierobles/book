@@ -15,7 +15,6 @@ public class officialBookRecommender {
     public static String URL_SOURCE;
 
     private static Book book;
-
     // used to sort list of books to recommended by greatest rating -> least
     private static Book[] bookRatings;
 
