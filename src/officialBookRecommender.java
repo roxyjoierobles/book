@@ -5,6 +5,7 @@ import parsers.XMLBookParser;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Scanner;
+
 public class officialBookRecommender {
     public static final String KEY = "mb40XFLSOsxeK6aQ2Q";
     public static final String SECRET = "IF5wIib7I0uc3piWd7jje5onlAyPN0Du6jksVlDy7k";
