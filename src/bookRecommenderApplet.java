@@ -3,6 +3,7 @@ import java.awt.*;
 
 public class bookRecommenderApplet extends Applet {
     public void init() {
+        setBackground(Color.white);
     }
 
     public void paint(Graphics g) {
