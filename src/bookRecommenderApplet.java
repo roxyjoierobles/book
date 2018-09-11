@@ -8,6 +8,7 @@ public class bookRecommenderApplet extends Applet {
 
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawString("Book Recommender", 10, 50);
+        g.drawString("Book Recommender", 500, 500);
+        g.drawString("Hello world", 500, 500);
     }
 }
