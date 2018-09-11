@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="book:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/book_jar</output-path>
+    <root id="archive" name="book.jar">
+      <element id="module-output" name="book" />
+      <element id="library" level="module" name="JUnit5" module-name="book" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../cpsc210_d10_project176/lib/junit-jupiter-api-5.0.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
