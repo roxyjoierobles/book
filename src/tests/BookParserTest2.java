@@ -2,9 +2,11 @@ import author.Author;
 import books.Book;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import parsers.BookParsingException;
 import parsers.IBookParser;
 import parsers.XMLBookParser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +39,16 @@ public class BookParserTest2 {
         IBookParser bookParser = new XMLBookParser(FILE);
         try {
             book = bookParser.parse();
-        } catch (Exception e) {
-            e.printStackTrace();
-            fail("Exception should not have been thrown");
+        }  catch (BookParsingException bpe) {
+            bpe.printStackTrace();
+            fail("BookParsingException should not have been thrown ");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            fail("IOException should not have been thrown");
         }
     }
 
+    /* need to work on test */
     @Test
     public void testParseBook() {
         assertEquals("To All the Boys I've Loved Before (To All the Boys I've Loved Before, #1)", book.getTitle());
