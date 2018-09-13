@@ -10,6 +10,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// normal test case
+// tests without author inputted in and if there are ' and & in such in xml file
 public class BookParserTest {
     //private static final String FILE = "https://www.goodreads.com/book/title.xml?key=mb40XFLSOsxeK6aQ2Q&title=dreamology";
     // using test.xml for book - Dreamology by Lucy Keating (to avoid changing review info)
