@@ -81,7 +81,7 @@ public class officialBookRecommender {
                 }
 
                 for (Book b : bookRatings) {
-                    System.out.println(b.getTitle() + " by " + b.getAuthor().getName() + " " + b.getAvgRating());
+                    System.out.println(b.getTitle() + " by " + b.getAuthor().getName() + ", rating: " + b.getAvgRating() + ", link: " + b.getGoodreadsLink());
                 }
 
 
